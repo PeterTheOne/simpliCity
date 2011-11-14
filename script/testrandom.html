@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SimpliCity</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="Author" content="Andreas Kasch"/>
+		<meta name="Description" content="SimpliCity"/>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		<link rel="shortcut icon" type="image/x-icon" href="images/system/logo.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale = 1.0, user-scalable = no" />
+		<script type="text/javascript" src="script/jquery.js"></script>
+		<script type="text/javascript" src="script/style.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<script type="text/javascript" src="random.js"></script>
+			<p id="info" style="font-family:Monospace"> </p>
+			<script type="text/javascript">
+				window.onload = function()
+				{
+					var time = new Date();
+					var rnd = new RandomNumbers(123, 1, 10);
+					var arr = new Array();
+					for(i = 1; i < 11; i++){
+						arr[i] = 0;
+					}
+					for(i = 0; i < 10000; i++){
+						arr[rnd.intRand()]++;
+					}
+					var text = "";
+					for(i = 0; i < arr.length; i++){
+						text += i + ":" + arr[i] + "<br/>";
+					}
+					document.getElementById("info").innerHTML = text;
+				}
+			</script>
+		</div>
+	</body>
+</html>

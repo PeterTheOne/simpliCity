@@ -1,26 +1,29 @@
 <?php
 	session_start();
+	
 	if(isset($_SESSION["authtoken"])){
+	
 		header("Location: index.php");
+		
+	} else if(isset($_GET["token"])){
+	
+	
+		require_once("includes/lib/FoursquareAPI.class.php");
+		define("CLIENT_ID",		"GPP0FG0DZI3ES5JKLNBJWZDMEITYI2XECBVTSW2GL3ZJCHGT");
+		define("CLIENT_SECRET",	"5P3ABYS1CSVHXVEEAHWZP1A42DWZ4DTXROA5SAFCTXZCJNMX");
+		
+		$foursquare = new FoursquareAPI(CLIENT_ID, CLIENT_SECRET);
+		
+		$foursquare->SetAccessToken($_GET["token"]);
+		
+		$request = $foursquare->GetPrivate("users/self");
+		$details = json_decode($request);
+		$firstName = $details->response->user->firstName;
+		echo "<p>Thanks for the authentication $firstName!</p>";
+		
+		
+	} else {
+		$host = $_SERVER[SERVER_NAME].$_SERVER[REQUEST_URI];
+		header("Location: http://petergrassberger.at/pro5/prototypes/foursquare-api_php-foursquare/?host=".$host);
 	}
 ?>
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>SimpliCity</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<meta name="Author" content="Andreas Kasch"/>
-		<meta name="Description" content="SimpliCity"/>
-		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
-		<link rel="shortcut icon" type="image/x-icon" href="images/system/logo.ico" />
-		<meta name="viewport" content="width=device-width, initial-scale = 1.0, user-scalable = no" />
-		<script type="text/javascript" src="script/jquery.js"></script>
-		<script type="text/javascript" src="script/style.js"></script>
-	</head>
-	<body>
-		<div id="container">
-			<iframe>
-			</iframe id="auth-file" name="auth-file" src="">
-		</div>
-	</body>
-</html>

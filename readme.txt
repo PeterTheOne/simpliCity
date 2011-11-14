@@ -1,4 +1,5 @@
 simplicity
 
-by Peter Grassberger
-...
+by
+Peter Grassberger
+Nora

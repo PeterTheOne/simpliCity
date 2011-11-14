@@ -1,8 +1,6 @@
 <?php
 	
-connect();
-	
-function connect() {
+function db_connect() {
 	$dbname="simpliCity";
 	$dbhost="SQL09.FREEMYSQL.NET";
 	$dbuser="anderl89";
@@ -11,7 +9,7 @@ function connect() {
 	mysql_select_db($dbname);
 }
 
-function disconnect(){
+function db_disconnect(){
 	mysql_close();
 }
 

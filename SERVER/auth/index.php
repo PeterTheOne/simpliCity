@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+if (isset($_GET['host'])) {
+	$_SESSION['host'] = sanitizeFilter($_GET['host']);
+}
 
 //https://github.com/stephenyoung/php-foursquare
 require_once("FoursquareAPI.class.php");
@@ -20,23 +25,11 @@ if(array_key_exists("code", $_GET)){
 	$token = $foursquare->GetToken(sanitizeFilter($_GET['code']), REDIRECT_URI);
 }
 
-?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>prototype: foursquare-api_php-foursquare</title>
-		
-		<meta charset="utf-8">
-	</head>
-	<body>
-<?php 
-
 	if (!isset($token)) { 
 		echo "<p id=\"authlink\"><a href='" . $foursquare->AuthenticationLink(REDIRECT_URI) . "'>Connect to this app via Foursquare</a></p>";
 	} else {
-		echo "<p id=\"token\">$token</p>";
+		//echo "<p id=\"token\">$token</p>";
+		header('Location: http://' . $_SESSION['host'] . "?token=$token");
 	}
 
 ?>
-	</body>
-</html>

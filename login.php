@@ -20,13 +20,13 @@
 		$request = $foursquare->GetPrivate("users/self");
 		$details = json_decode($request);
 		
-		//printarray($details);
+		printarray($details);
 		
 		$err = isset($details->meta->code)? $details->meta->code : 0;
 		if($err != 400 && $err != 401 && $err != 403 && $err != 404 && $err != 405 && $err != 500){
 			
 			$_SESSION["authtoken"] = $_GET["token"];
-			header("Location: index.php");
+			//header("Location: index.php");
 			
 		} else {
 			echo "<p>".$details->meta->errorType.": ".$details->meta->errorDetail."</p>";

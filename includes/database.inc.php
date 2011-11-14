@@ -1,7 +1,7 @@
 <?php
 	
 function db_connect() {
-	$dbname="simpliCity";
+	$dbname="simplicity";
 	$dbhost="SQL09.FREEMYSQL.NET";
 	$dbuser="anderl89";
 	$dbpass="simpliCity";

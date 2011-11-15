@@ -13,25 +13,94 @@
 	</head>
 	<body>
 		<div id="container">
-			<script type="text/javascript" src="random.js"></script>
+			<script type="text/javascript" src="functions.js"></script>
 			<p id="info" style="font-family:Monospace"> </p>
+			<p id="seed">S3RXPQE1DQI5K4EUUA3UIZ2YK0YTXRVH3G40UJS5NQGOKRF5</p>
 			<script type="text/javascript">
+				var innerCity = 1000;
+				var industry = 700;
+				var urban = 2000;
+				var rural = 500;
+				
 				window.onload = function()
 				{
-					var time = new Date();
-					var rnd = new RandomNumbers(123, 1, 10);
-					var arr = new Array();
-					for(i = 1; i < 11; i++){
-						arr[i] = 0;
+					update();
+				}
+				
+				document.onkeypress = handleKey;
+				
+				function handleKey(evt){
+					//alert(evt.keyCode);
+					if ((evt.keyCode == 113)) 
+					{
+						innerCity++;
+						update();
+					} else if ((evt.keyCode == 119)) 
+					{
+						industry++;
+						update();
+					} else if ((evt.keyCode == 101)) 
+					{
+						urban++;
+						update();
+					} else if ((evt.keyCode == 114)) 
+					{
+						rural++;
+						update();
+					} else {
+						update();
 					}
-					for(i = 0; i < 10000; i++){
-						arr[rnd.intRand()]++;
+				}
+				
+				function update(){
+					var seed = document.getElementById("seed").innerHTML;
+					var info = document.getElementById("info");
+					info.innerHTML = buildCity(innerCity, industry, urban, rural, seed, 5)
+					
+					//var myseed = getSeed(seed);
+					//info.innerHTML = "Seed " + myseed;
+					/*var rnd = new RandomNumbers(myseed);
+					var innerRnd = new RandomNumbers(rnd.intRand(0,99));
+					var indusRnd = new RandomNumbers(rnd.intRand(0,99));
+					var urbanRnd = new RandomNumbers(rnd.intRand(0,99));
+					var ruralRnd = new RandomNumbers(rnd.intRand(0,99));
+					var city = new City();
+					var indusX = rnd.intRand(-6,6);
+					var indusY = rnd.intRand(-6,6);
+					var cityX = 0;
+					var cityY = 0;
+					for(var i = 0; i < innerCity || i < industry; i++){
+						if(i < innerCity){
+							do{
+								cityX += innerRnd.intRand(-1,1);
+								cityY += innerRnd.intRand(-1,1);
+							}while(!city.addBuilding(4, cityX, cityY));
+						}
+						if(i < industry){
+							do{
+								indusX += indusRnd.intRand(-1,1);
+								indusY += indusRnd.intRand(-1,1);
+							}while(!city.addBuilding(3, indusX, indusY));
+						}
 					}
-					var text = "";
-					for(i = 0; i < arr.length; i++){
-						text += i + ":" + arr[i] + "<br/>";
+					cityX = 0;
+					cityY = 0;
+					for(var i = 0; i < urban; i++){
+						do{
+							cityX += urbanRnd.intRand(-2,2);
+							cityY += urbanRnd.intRand(-2,2);
+						}while(!city.addBuilding(2, cityX, cityY));
 					}
-					document.getElementById("info").innerHTML = text;
+					cityX = 0;
+					cityY = 0;
+					for(var i = 0; i < rural; i++){
+						do{
+							cityX += ruralRnd.intRand(-5,5);
+							cityY += ruralRnd.intRand(-5,5);
+						}while(!city.addBuilding(1, cityX, cityY));
+					}
+					city.calcLower(myseed, 3);*/
+					//info.innerHTML += "<br/>"+city.lowerToString();
 				}
 			</script>
 		</div>

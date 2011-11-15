@@ -6,7 +6,7 @@
 	require_once("includes/lib/FoursquareAPI.class.php");
 	require_once("includes/essentials.inc.php");
 	require_once("includes/fs_essentials.inc.php");
-	require_once("includes/database.inc.php");
+	require_once("includes/db_essentials.inc.php");
 	require_once("User.class.php");
 	
 	fs_setup($_SESSION["authtoken"]);

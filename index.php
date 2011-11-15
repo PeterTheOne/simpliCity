@@ -5,10 +5,11 @@
 	
 	require_once("includes/lib/FoursquareAPI.class.php");
 	require_once("includes/essentials.inc.php");
+	require_once("includes/fs_essentials.inc.php");
 	require_once("includes/database.inc.php");
+	require_once("User.class.php");
 	
-	setupFoursquare();
-	
+	fs_setup($_SESSION["authtoken"]);
 	checkAuthentication();
 	
 	/*
@@ -27,13 +28,14 @@
 			$foursquare->SetAccessToken($_SESSION["authtoken"]);
 			if (!isset($_SESSION['authenticated']) || 
 					$_SESSION['authenticated'] !== date("Y-m-d")) {
-				if (!checkUser()) {
+				if (checkUser()) {
+					$_SESSION['authenticated'] = date("Y-m-d");
+				} else {
 					header("Location: logout.php");
 				}
 			}
 		}
-	}
-	
+	}	
 	
 	/*
 	 *
@@ -106,10 +108,7 @@
 			}
 			
 			db_disconnect();
-			
-			$_SESSION['authenticated'] = date("Y-m-d");
-			$_SESSION['userid'] = $userID;
-			
+			$_SESSION['userid'] = $userID;			
 			return true;
 		}
 		
@@ -122,7 +121,6 @@
 	 *
 	*/
 	require_once("template/header.tpl.php");
-	echo "<a href=\"mysqlfunctionstest.php\">mysqlfunctionstest</a>";
 	require_once("template/cityview.tpl.php");
 	require_once("template/citymenu.tpl.php");
 	require_once("template/footer.tpl.php");

@@ -2,11 +2,11 @@
 session_start();
 
 require_once("includes/essentials.inc.php");
+require_once("includes/fs_essentials.inc.php");
 require_once("includes/database.inc.php");
 require_once("User.class.php");
 	
-setupFoursquare();
-$foursquare->SetAccessToken($_SESSION["authtoken"]);
+fs_setup($_SESSION["authtoken"]);
 
 echo "<h1>mysqlfunctionstest</h1>";
 
@@ -117,7 +117,7 @@ function printOptions() {
 	echo "<p>Du hast am " . date("d.m.Y G:i", $checkin->createdAt);
 	echo " in Foursquare im " . $venue->name . " eingecheckt.</p>";
 	
-	if ($checkin->createdAt < time() - 100 * 3600) {
+	if ($checkin->createdAt < time() - 3600) {
 		echo "<p>Du kannst keine Bürger plazieren, dein checkin ist zu lange her.</p>";
 		//TODO: get venues nearby with venues/explore and geolocation
 	} else if ($user->unusedCitizen < 1) {
@@ -126,7 +126,6 @@ function printOptions() {
 		echo "<p><a href=\"mysqlfunctionstest.php?remove-citizen=$venue->id&job=$job\">Bürger aus Stadt nehmen</a>?</p>";
 	} else {
 		$job = "test";
-		
 		echo "<p><a href=\"mysqlfunctionstest.php?place-citizen=$venue->id&job=$job\">Bürger plazieren</a>?</p>";
 		echo "<p><a href=\"mysqlfunctionstest.php?remove-citizen=$venue->id&job=$job\">Bürger aus Stadt nehmen</a>?</p>";
 		

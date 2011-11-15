@@ -122,8 +122,8 @@
 	 *
 	*/
 	require_once("template/header.tpl.php");
-	//require_once("template/cityview.tpl.php");
 	echo "<a href=\"mysqlfunctionstest.php\">mysqlfunctionstest</a>";
-	//require_once("template/menu.tpl.php");
+	require_once("template/cityview.tpl.php");
+	require_once("template/citymenu.tpl.php");
 	require_once("template/footer.tpl.php");
 ?>

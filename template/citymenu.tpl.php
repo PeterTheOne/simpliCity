@@ -5,6 +5,9 @@
 					<p class="button" id="guildBtn">g</p>
 					<p class="button" id="statsBtn">s</p>
 				</div>
+				<p id="cityname">
+					
+				</p>
 				<div id="lowerLeft">
 					<p class="button" id="addBtn">a</p>
 				</div>

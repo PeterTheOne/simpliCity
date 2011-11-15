@@ -22,7 +22,9 @@ $(function(){
 	
 	$(".button").bind("touchstart",function(){
 		$(this).css({
-			'background-color' : '#6666CC',
+			'background' : '-webkit-gradient(linear, left top, left bottom, from(rgba(102,102,204,0.8)), to(rgba(51,51,153,0.6)))',
+			'background' : '-moz-linear-gradient(top,  rgba(102,102,204,0.8),  rgba(51,51,153,0.6))',
+			'background' : '-o-linear-gradient(top , rgba(102,102,204,0.8), rgba(51,51,153,0.6))', 
 			'border-top-color' : '#000033',
 			'border-right-color' : '#CCCCFF',
 			'border-bottom-color' : '#CCCCFF',
@@ -32,7 +34,9 @@ $(function(){
 	
 	$(".button").bind("touchend",function(){
 		$(this).css({
-			'background-color' : '#333399',
+			'background' : '-webkit-gradient(linear, left top, left bottom, from(rgba(51,51,153,0.8)), to(rgba(102,102,204,,0.6)))',
+			'background' : '-moz-linear-gradient(top,  rgba(51,51,153,0.8),  rgba(102,102,204,,0.6))',
+			'background' : '-o-linear-gradient(top , rgba(51,51,153,0.8), rgba(102,102,204,,0.6))',
 			'border-top-color' : '#CCCCFF',
 			'border-right-color' : '#000033',
 			'border-bottom-color' : '#000033',

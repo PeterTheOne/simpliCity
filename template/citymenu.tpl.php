@@ -1,3 +1,4 @@
+			<script type="text/javascript" src="script/citymenu.js"></script>
 			<div id="menu">
 				<div id="upperLeft">
 					<p class="button" id="cityBtn">c</p>

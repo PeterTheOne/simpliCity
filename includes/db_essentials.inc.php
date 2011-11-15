@@ -1,7 +1,19 @@
 <?php
 
-require_once("includes/database.inc.php");
 require_once("User.class.php");
+
+function db_connect() {
+	$dbname="simplicity";
+	$dbhost="SQL09.FREEMYSQL.NET";
+	$dbuser="anderl89";
+	$dbpass="simpliCity";
+	mysql_connect($dbhost,$dbuser,$dbpass);
+	mysql_select_db($dbname);
+}
+
+function db_disconnect(){
+	mysql_close();
+}
 
 /*
  *

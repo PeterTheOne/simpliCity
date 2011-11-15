@@ -1,13 +1,15 @@
 <?php
 	session_start();
 	
+	require_once("includes/essentials.inc.php");
+	
 	if(isset($_SESSION["authtoken"])){
 	
 		header("Location: index.php");
 		
 	} else if(isset($_GET["token"])){
 	
-		$_SESSION["authtoken"] = $_GET["token"];
+		$_SESSION["authtoken"] = sanitizeFilter($_GET["token"]);
 		header("Location: index.php");
 		
 	} else {

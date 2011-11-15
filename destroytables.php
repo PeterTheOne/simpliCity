@@ -1,8 +1,9 @@
 <?php
 
 require_once("includes/database.inc.php");
+require_once("includes/essentials.inc.php");
 
-if(isset($_GET["confirm"]) && $_GET["confirm"] == "true"){
+if(isset($_GET["confirm"]) && sanitizeFilter($_GET["confirm"]) == "true"){
 	db_connect();
 
 	mysql_query(

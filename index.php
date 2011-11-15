@@ -9,25 +9,29 @@
 	
 	setupFoursquare();
 	
-	if(!isset($_SESSION["authtoken"]) || !checkUser()){
-		header("Location: logout.php");
-	}
+	checkAuthentication();
 	
 	/*
 	 *
-	 *	setup the foursquare connection
+	 *	check if the user token has been checked
+	 *	in this session and today
+	 *	sets AccessToken
 	 *
 	*/
-	function setupFoursquare(){
-	
+	function checkAuthentication() {
 		global $foursquare;
-		
-		$foursquare = new FoursquareAPI(CLIENT_ID, CLIENT_SECRET);
-		
-		if(isset($_SESSION["authtoken"])){
+	
+		if (!isset($_SESSION['authtoken'])) {
+			header("Location: logout.php");
+		} else {
 			$foursquare->SetAccessToken($_SESSION["authtoken"]);
+			if (!isset($_SESSION['authenticated']) || 
+					$_SESSION['authenticated'] !== date("Y-m-d")) {
+				if (!checkUser()) {
+					header("Location: logout.php");
+				}
+			}
 		}
-		
 	}
 	
 	
@@ -50,6 +54,7 @@
 		if($err >= 400 && $err <= 500){
 			//echo $err;
 			//echo "<p>".$details->meta->errorType.": ".$details->meta->errorDetail."</p>";
+			//TODO: if token is invalid, redirect to login/out
 			return false;
 			
 		} else {
@@ -93,7 +98,6 @@
 					);
 				}
 				
-			
 			} else {
 				
 				db_disconnect();
@@ -102,6 +106,9 @@
 			}
 			
 			db_disconnect();
+			
+			$_SESSION['authenticated'] = date("Y-m-d");
+			$_SESSION['userid'] = $userID;
 			
 			return true;
 		}
@@ -116,6 +123,7 @@
 	*/
 	require_once("template/header.tpl.php");
 	//require_once("template/cityview.tpl.php");
+	echo "<a href=\"mysqlfunctionstest.php\">mysqlfunctionstest</a>";
 	//require_once("template/menu.tpl.php");
 	require_once("template/footer.tpl.php");
 ?>

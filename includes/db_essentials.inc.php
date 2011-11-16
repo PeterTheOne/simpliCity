@@ -17,6 +17,21 @@ function db_disconnect(){
 
 /*
  *
+ *	checks the errorCode and optionally printsErrors
+ *
+*/
+function db_hasErrors($r) {
+	if(!$r){
+		if (PRINT_DB_ERRORS) {
+			echo "<p>error: " . mysql_error($r) . "</p>";
+		}
+		return true;
+	}
+	return false;
+}
+
+/*
+ *
  *	creates global user object
  *	don't forget to use db_selectUser after db changes!!!
  *
@@ -25,7 +40,7 @@ function db_selectUser($userid) {
 	global $user;
 	db_connect();
 	$r = mysql_query("SELECT * FROM users WHERE ID='$userid'");
-	if (mysql_num_rows($r) !== 1) {
+	if (db_hasErrors($r) || mysql_num_rows($r) !== 1) {
 		db_disconnect();
 		return false;
 	}
@@ -34,6 +49,28 @@ function db_selectUser($userid) {
 		$user = new User($line);
 		return true;
 	}
+}
+
+/*
+ *
+ *	creates global citizenOfVenue object
+ *	don't forget to use db_selectCitizenOfVenue after db changes!!!
+ *
+*/
+function db_selectCitizenOfVenue($userId, $venueId) {
+	global $citizenOfVenue;
+	db_connect();
+	$r = mysql_query("SELECT * FROM citizen WHERE UserID='$userId' AND VenueID='$venueId'");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$citizenOfVenue = array();
+	while ($line = mysql_fetch_array($r)) {
+		$citizenOfVenue[] = $line;
+	}
+	db_disconnect();
+	return true;
 }
 
 ?>

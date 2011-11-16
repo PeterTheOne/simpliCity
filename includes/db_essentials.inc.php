@@ -73,4 +73,26 @@ function db_selectCitizenOfVenue($userId, $venueId) {
 	return true;
 }
 
+/*
+ *
+ *	creates global citizenOfVenue object
+ *	don't forget to use db_selectCitizenOfVenue after db changes!!!
+ *
+*/
+function db_citizenGroupJob($userId, $venueId) {
+	global $citizenGroupJob;
+	db_connect();
+	$r = mysql_query("SELECT Job, COUNT(ID) FROM citizen WHERE UserID='$userId' AND VenueID='$venueId' GROUP BY Job");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$citizenGroupJob = array();
+	while ($line = mysql_fetch_array($r)) {
+		$citizenGroupJob[$line['Job']] = $line['COUNT(ID)'];
+	}
+	db_disconnect();
+	return true;
+}
+
 ?>

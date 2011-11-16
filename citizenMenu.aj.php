@@ -15,7 +15,6 @@ $venue = $latestCheckin->venue;
 // fetch from db
 //TODO: error handling
 db_selectUser($_SESSION['userid']);
-db_selectCitizenOfVenue($_SESSION['userid'], $venue->id);
 
 echo "<script type=\"text/javascript\" src=\"script/citizenMenu.js\"></script>";
 echo "<div style=\"padding-top:50px\">";
@@ -23,18 +22,26 @@ echo "<div style=\"padding-top:50px\">";
 if (!fs_isCheckedIn($latestCheckin->createdAt)) {
 	echo "<p>Du kannst keine Bürger plazieren oder entfernen, dein checkin ist zu lange her.</p>";
 } else {
-	//TODO: add job selection
-	$job = "test";
-	if ($user->unusedCitizen < 1) {
-		echo "<p>Du hast keine Bürger mehr die du plazieren kannst.</p>";
+	//db_selectCitizenOfVenue($_SESSION['userid'], $venue->id);
+	db_citizenGroupJob($_SESSION['userid'], $venue->id);
+	//TODO: auch jobs auflisten in denen keine bürger sind.
+	//TODO: machen das der addCitizen button auch wirklich diesen job hinzufügt
+	if (count($citizenGroupJob) < 1) {
+		echo "<p>Es gibt keine Bürger in dieser Stadt</p>";
 	} else {
-		echo "<p id=\"addCitizen\">Bürger plazieren?</p>";
-	}
-	if (count($citizenOfVenue) > 0) { //TODO: cout per job
-		echo "<p id=\"removeCitizen\">Bürger aus Stadt nehmen?</p>";
-	} else {
-		echo "<p>Es gibt keine Bürger die du aus der Stadt nehmen kannst.</p>";
+		echo "<table border=\"1\">";
+		echo "<tr><td>job</td><td>count</td><td>-</td><td>+</td></tr>";
+		foreach ($citizenGroupJob as $count => $job) {
+			echo "<tr>";
+			echo "<td>" . $job . "</td>";
+			echo "<td>" . $count . "</td>";
+			echo "<td><span id=\"removeCitizen\">Bürger aus Stadt nehmen?</span></td>";
+			echo "<td><span id=\"addCitizen\">Bürger plazieren?</span></td>";
+			echo "</tr>";
+		}
+		echo "</table>";
 	}
 }
 echo "</div>";
+
 ?>

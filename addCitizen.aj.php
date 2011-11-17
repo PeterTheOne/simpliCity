@@ -16,7 +16,7 @@ $venue = $latestCheckin->venue;
 db_selectUser($_SESSION['userid']);
 $citizenGroupJob = db_selectCitizenOfVenue($_SESSION['userid'], $venue->id);
 
-//TODO: make $job variable
+// addCitizen
 $job = sanitizeFilter($_POST['id']);
 $result = addCitizen($user, $venue->id, $latestCheckin->createdAt, $job);
 
@@ -41,7 +41,6 @@ function addCitizen($user, $venueId, $checkinTime, $job) {
 	db_connect();
 	mysql_query("SET AUTOCOMMIT=0");
 	mysql_query("START TRANSACTION");
-	//TODO: check if 'UnusedCitizen - 1' works
 	$r1 = mysql_query("UPDATE users SET UnusedCitizen=UnusedCitizen-1 WHERE ID='$user->id'");
 	$r2 = mysql_query("INSERT INTO citizen (UserID,VenueID,Job) VALUES ('$user->id','$venueId','$job')");
 	if (db_hasErrors($r1) || db_hasErrors($r2)) {

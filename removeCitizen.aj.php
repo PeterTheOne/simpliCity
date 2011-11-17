@@ -15,7 +15,7 @@ $venue = $latestCheckin->venue;
 //TODO: error handling
 db_selectUser($_SESSION['userid']);
 
-//TODO: make $job variable
+// removeCitizen 
 $job = sanitizeFilter($_POST['id']);
 $result = removeCitizen($venue->id, $latestCheckin->createdAt,  $job);
 

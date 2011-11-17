@@ -12,7 +12,7 @@ $(function(){
 	});
 	
 	$("#canvas").bind("touchend",function(){
-		$("#canvas").click();
+		//$("#canvas").click();
 	});
 	
 	$("#canvas").click(function(){

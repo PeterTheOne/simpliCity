@@ -6,7 +6,7 @@ html, body{
 	color: rgb(192,192,192);
 	text-align: center;
 	font-family: Nyala,Verdana,Arial,sans-serif;
-	font-size: 25pt;
+	font-size: 12pt;
 }
 
 #container{
@@ -190,31 +190,14 @@ html, body{
 	margin-right:50px;
 }
 
-#lastTitle{
-	height: 50px;
-	float: left;
-	width: 30%;
-	text-align: left;
-	color: -webkit-gradient(linear, left top, right top, from(rgba(172,172,172,0.0)), to(rgba(172,172,172,0.8)));
-	color: -moz-linear-gradient(left,  rgba(72,172,172,0.0),  rgba(72,172,172,0.8));
-	color: -o-linear-gradient(left , rgba(72,172,172,0.0), rgba(72,172,172,0.8));
-}
 
 #currentTitle{
 	height: 45px;
-	width: 40%;
-	margin-left: 30%;
-	margin-right: 30%;
+	width: 100%;
 	text-align: center;
-	padding-top: 5px;
+	padding-top: 15px;
 }
 
-#nextTitle{
-	height: 50px;
-	float: right;
-	width: 30%;
-	text-align: right;
-	color: -webkit-gradient(linear, left top, right top, from(rgba(172,172,172,0.8)), to(rgba(172,172,172,0.0)));
-	color: -moz-linear-gradient(left,  rgba(72,172,172,0.8),  rgba(72,172,172,0.0));
-	color: -o-linear-gradient(left , rgba(72,172,172,0.8), rgba(72,172,172,0.0)); 
+#citizenDescription{
+	padding: 5px;
 }

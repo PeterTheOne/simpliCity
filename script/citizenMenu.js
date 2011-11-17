@@ -26,7 +26,7 @@ $(function(){
 	$("#goForward").css("cursor","pointer");
 	$("#goBack").css("cursor","pointer");
 	$("#goForward").bind("touchend", function(){
-		$("#goForward").click();
+		//$("#goForward").click();
 	});
 	$("#goForward").click(function(){
 		$current = ($current+1)%$count;
@@ -34,7 +34,7 @@ $(function(){
 		updateCitizenMenu();
 	});
 	$("#goBack").bind("touchend", function(){
-		$("#goBack").click();
+		//$("#goBack").click();
 	});
 	$("#goBack").click(function(){
 		$current = ($current-1+$count)%$count;
@@ -45,7 +45,7 @@ $(function(){
 	$("#addCitizen").css("cursor","pointer");
 	$("#removeCitizen").css("cursor","pointer");
 	$("#addCitizen").bind("touchend", function(){
-		$("#addCitizen").click();
+		//$("#addCitizen").click();
 	});
 	$("#addCitizen").click(function(){
 		$.post("addCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
@@ -59,7 +59,7 @@ $(function(){
 		});
 	});
 	$("#removeCitizen").bind("touchend", function(){
-		$("#removeCitizen").click();
+		//$("#removeCitizen").click();
 	});
 	$("#removeCitizen").click(function(){
 		$.post("removeCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){

@@ -3,11 +3,15 @@
 require_once("User.class.php");
 
 function db_connect() {
-	$dbname="simplicity";
+	/*$dbname="simplicity";
 	//$dbhost="SQL09.FREEMYSQL.NET";
 	$dbhost="localhost";
 	$dbuser="anderl89";
-	$dbpass="simpliCity";
+	$dbpass="simpliCity";*/
+	$dbhost = "mysql2.000webhost.com";
+	$dbname = "a3943217_simplic";
+	$dbuser = "a3943217_simplic";
+	$dbpass = "hoooray11";
 	mysql_connect($dbhost,$dbuser,$dbpass);
 	mysql_select_db($dbname);
 }

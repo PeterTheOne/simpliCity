@@ -24,8 +24,6 @@
 					<div id="goBack"><img src="images/interface/left.png" alt="left"/></div>
 					<div id="goForward"><img src="images/interface/right.png" alt="right"/></div>
 					<div id="citizenTitles">
-						<div id="lastTitle"></div>
-						<div id="nextTitle"></div>
 						<div id="currentTitle"></div>
 					</div>
 				</div>

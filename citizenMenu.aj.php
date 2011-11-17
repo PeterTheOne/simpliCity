@@ -16,18 +16,18 @@ $venue = $latestCheckin->venue;
 //TODO: error handling
 db_selectUser($_SESSION['userid']);
 
-
 echo "<script type=\"text/javascript\" src=\"script/citizenMenu.js\"></script>";
 echo "<div style=\"padding-top:50px\">";
 
-//TODO: remove '* 1000' it is only for debug
-if (!fs_isCheckedIn($latestCheckin->createdAt)) {
-	echo "<p>Du kannst keine Bürger plazieren oder entfernen, dein checkin ist zu lange her.</p>";
-} else {
-	//db_selectCitizenOfVenue($_SESSION['userid'], $venue->id);
+displayMenu($latestCheckin);
+
+echo "</div>";
+
+function displayMenu($latestCheckin) {
+	if (!fs_isCheckedIn($latestCheckin->createdAt)) {
+		echo "<p>Du kannst keine Bürger plazieren oder entfernen, dein checkin ist zu lange her.</p>";
+	}
 	$citizenGroupJob = db_citizenGroupJob($_SESSION['userid'], $venue->id);
-	//TODO: auch jobs auflisten in denen keine bürger sind.
-	//TODO: machen das der addCitizen button auch wirklich diesen job hinzufügt
 	echo "<table border=\"1\">";
 	echo "<tr><td>job</td><td>desc</td><td>count</td><td>-</td><td>+</td></tr>";
 	foreach ($citizenGroupJob as $job) {
@@ -35,12 +35,12 @@ if (!fs_isCheckedIn($latestCheckin->createdAt)) {
 		echo "<td>" . $job['Name'] . "</td>";
 		echo "<td>" . $job['Description'] . "</td>";
 		echo "<td>" . $job['jobCount'] . "</td>";
-		if ($job['jobCount'] > 0) {
+		if ($job['jobCount'] > 0 && fs_isCheckedIn($latestCheckin->createdAt)) {
 			echo "<td><span class=\"id\" style=\"display: none\">". $job['ID'] ."</span><span class=\"removeCitizen\">Bürger aus Stadt nehmen?</span></td>";
 		} else {
 			echo "<td>-</td>";
 		}
-		if ($user->unusedCitizen > 0) {
+		if ($user->unusedCitizen > 0 && fs_isCheckedIn($latestCheckin->createdAt)) {
 			echo "<td><span class=\"id\" style=\"display: none\">". $job['ID'] ."</span><span class=\"addCitizen\">Bürger plazieren?</span></td>";
 		} else {
 			echo "<td>-</td>";
@@ -49,5 +49,5 @@ if (!fs_isCheckedIn($latestCheckin->createdAt)) {
 	}
 	echo "</table>";
 }
-echo "</div>";
+
 ?>

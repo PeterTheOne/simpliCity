@@ -21,7 +21,7 @@ $jobs[] = array(
 );
 $jobs[] = array(
 	'name' => 'Geistlicher', 
-	'description' => 'Der Geistliche bringt den Glauben zur Menschheit. Vor allem f&uuml; das Kleinb&uuml;rgertum ist die Religion sehr wichtig', 
+	'description' => 'Der Geistliche bringt den Glauben zur Menschheit. Vor allem f&uuml;r das Kleinb&uuml;rgertum ist die Religion sehr wichtig', 
 	'education' => 2, 'research' => -1, 'wealth' => 2, 'production' => 0, 'religion' => 5
 );
 

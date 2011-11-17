@@ -8,10 +8,6 @@ function db_connect() {
 	$dbhost="localhost";
 	$dbuser="anderl89";
 	$dbpass="simpliCity";
-	/*$dbname="phost186501";
-	$dbhost="localhost";
-	$dbuser="phost186501";
-	$dbpass="hoooray11";*/
 	mysql_connect($dbhost,$dbuser,$dbpass);
 	mysql_select_db($dbname);
 }

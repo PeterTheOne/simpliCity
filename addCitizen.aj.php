@@ -14,11 +14,11 @@ $venue = $latestCheckin->venue;
 // fetch from db
 //TODO: error handling
 db_selectUser($_SESSION['userid']);
-db_selectCitizenOfVenue($_SESSION['userid'], $venue->id);
+$citizenGroupJob = db_selectCitizenOfVenue($_SESSION['userid'], $venue->id);
 
 //TODO: make $job variable
-$job = "test";
-$result = addCitizen($user, $venue->id, $latestCheckin->createdAt,  $job);
+$job = sanitizeFilter($_POST['id']);
+$result = addCitizen($user, $venue->id, $latestCheckin->createdAt, $job);
 
 echo "<div style=\"padding-top:50px\">";
 if ($result) {
@@ -28,7 +28,10 @@ if ($result) {
 }
 echo "</div>";
 
-function addCitizen($user, $venueId, $checkinTime, $job) {	
+function addCitizen($user, $venueId, $checkinTime, $job) {
+	if ($job == 0) {
+		return false;
+	}
 	if ($user->unusedCitizen < 1) {
 		return false;
 	}
@@ -39,7 +42,7 @@ function addCitizen($user, $venueId, $checkinTime, $job) {
 	mysql_query("SET AUTOCOMMIT=0");
 	mysql_query("START TRANSACTION");
 	//TODO: check if 'UnusedCitizen - 1' works
-	$r1 = mysql_query("UPDATE users SET UnusedCitizen='UnusedCitizen - 1' WHERE ID='$user->id'");
+	$r1 = mysql_query("UPDATE users SET UnusedCitizen=UnusedCitizen-1 WHERE ID='$user->id'");
 	$r2 = mysql_query("INSERT INTO citizen (UserID,VenueID,Job) VALUES ('$user->id','$venueId','$job')");
 	if (db_hasErrors($r1) || db_hasErrors($r2)) {
 		mysql_query("ROLLBACK");

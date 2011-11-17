@@ -65,7 +65,8 @@ function move(e){
 		offy += p.y - my;
 		mx = p.x;
 		my = p.y;
-		//draw();
+		
+		draw(0);
 	}
 	return false;
 }
@@ -95,7 +96,7 @@ function getCoords(e) {
 
 function draw(cFrame){
 	cFrame++;
-	if(true){
+	if(imagesReady()){
 		context.beginPath();
 		context.rect(0, 0, canvas.width, canvas.height);
 		context.fillStyle = "#00FF00";
@@ -157,6 +158,8 @@ function draw(cFrame){
 				context.drawImage(cloudsB, (-cloudsB.width+i*(cloudsB.width)+coffx),(-cloudsB.height+j*(cloudsB.height)+coffy));
 			}
 		}
+	} else {
+		setTimeout("draw(0)",40);
 	}
-	setTimeout("draw("+cFrame+")",40);
+	//setTimeout("draw("+cFrame+")",40);
 }

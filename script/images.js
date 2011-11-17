@@ -73,9 +73,9 @@ function imagesReady(){
 		if(!imgRural[i].complete) return false;
 	}
 	
-	if(clouds.complete) return false;
-	if(cloudsB.complete) return false;
-	if(grass.complete) return false;
+	if(!clouds.complete) return false;
+	if(!cloudsB.complete) return false;
+	if(!grass.complete) return false;
 	
 	return true;
 }

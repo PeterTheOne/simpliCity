@@ -10,7 +10,7 @@ $r = mysql_query(
 		Token VARCHAR(128) NOT NULL,
 		LoginDate DATE NOT NULL,
 		UnusedCitizen INT NOT NULL
-	);");
+	)ENGINE=InnoDB;");
 db_hasErrors($r);
 
 $r = mysql_query(
@@ -18,8 +18,8 @@ $r = mysql_query(
 		ID BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		UserID BIGINT NOT NULL,
 		VenueID VARCHAR(128) NOT NULL,
-		Job TINYTEXT NOT NULL
-	);");
+		Job BIGINT NOT NULL
+	)ENGINE=InnoDB;");
 db_hasErrors($r);
 
 $r = mysql_query(
@@ -32,7 +32,7 @@ $r = mysql_query(
 		Wealth TINYINT NOT NULL,
 		Production TINYINT NOT NULL,
 		Religion TINYINT NOT NULL
-	);");
+	)ENGINE=InnoDB;");
 db_hasErrors($r);
 	
 db_disconnect();

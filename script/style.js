@@ -11,6 +11,14 @@ $(function(){
 		update();
 	});
 	
+	$("#canvas").bind("touchend",function(){
+		$("#canvas").click();
+	});
+	
+	$("#canvas").click(function(){
+		$("#overlay").hide();
+	});
+	
 	/*$(window).bind("touchstart",function(){
 		hide = false;
 	});
@@ -52,6 +60,12 @@ function update(){
 	var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
 	$("#canvas").attr("width", width);
 	$("#canvas").attr("height", height);
+	$("#overlay").css("width", width - 100);
+	$("#overlay").css("height", height - 150);
+	$("#overlay").css("top", 75);
+	$("#overlay").css("left", 50);
+	//$("#overlay").show();
+	
 	/*var difference = Math.abs(width-height);
 	var third = parseInt((difference-6)/3);
 	var remainder = difference%3;

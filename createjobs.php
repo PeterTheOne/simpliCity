@@ -5,23 +5,23 @@ require_once("includes/essentials.inc.php");
 
 $jobs = array();
 $jobs[] = array(
-	'name' => 'scientist', 
-	'description' => 'wissenschaftler bla', 
+	'name' => 'Wissenschaftler', 
+	'description' => 'Der Wissenschaftler f&ouml;rdert treibt die Forschung an, verringert aber den G&ouml;tterglauben der Menschheit', 
 	'education' => 2, 'research' => 5, 'wealth' => 0, 'production' => 1, 'religion' => -3
 );
 $jobs[] = array(
-	'name' => 'teacher', 
-	'description' => 'lehrer bla', 
+	'name' => 'Lehrer', 
+	'description' => 'Der Lehrer sorgt f&uuml;r eine bessere Bildung was auch den Wohlstand erh&ouml;ht', 
 	'education' => 5, 'research' => 2, 'wealth' => 2, 'production' => 0, 'religion' => 1
 );
 $jobs[] = array(
-	'name' => 'craftsman', 
-	'description' => 'handwerker bla', 
+	'name' => 'Arbeiter', 
+	'description' => 'Der Arbeiter kurbelt die Produktion an, der Wohlstand der Stadt steigt', 
 	'education' => 0, 'research' => 1, 'wealth' => 3, 'production' => 5, 'religion' => 0
 );
 $jobs[] = array(
-	'name' => 'priest', 
-	'description' => 'geistlicher bla', 
+	'name' => 'Geistlicher', 
+	'description' => 'Der Geistliche bringt den Glauben zur Menschheit. Vor allem f&uuml; das Kleinb&uuml;rgertum ist die Religion sehr wichtig', 
 	'education' => 2, 'research' => -1, 'wealth' => 2, 'production' => 0, 'religion' => 5
 );
 

@@ -16,7 +16,7 @@ $venue = $latestCheckin->venue;
 //TODO: error handling
 db_selectUser($_SESSION['userid']);
 
-echo "<script type=\"text/javascript\" src=\"script/citizenMenu.js\"></script>";
+//echo "<script type=\"text/javascript\" src=\"script/citizenMenu.js\"></script>";	//this line is EVIL! every time you load this file via ajax, the script is loaded again and again and again, and all the events in the script are triggered multiple times!!!
 echo "<div style=\"padding-top:50px\">";
 
 displayMenu($latestCheckin);
@@ -25,27 +25,33 @@ echo "</div>";
 
 function displayMenu($latestCheckin) {
 	global $user;
+	global $venue;
 
 	if (!fs_isCheckedIn($latestCheckin->createdAt)) {
 		echo "<p>Du kannst keine Bürger plazieren oder entfernen, dein checkin ist zu lange her.</p>";
 	}
 	$citizenGroupJob = db_citizenGroupJob($_SESSION['userid'], $venue->id);
 	echo "<table border=\"1\">";
-	echo "<tr><td>job</td><td>desc</td><td>count</td><td>-</td><td>+</td></tr>";
+	echo "<tr><td>id</td><td>job</td><td>desc</td><td>count</td><td>-</td><td>+</td></tr>";
 	foreach ($citizenGroupJob as $job) {
-		echo "<tr>";
+		echo "<tr class=\"jobentry\">";
+		echo "<td>" . $job['ID'] . "</td>";
 		echo "<td>" . $job['Name'] . "</td>";
 		echo "<td>" . $job['Description'] . "</td>";
 		echo "<td>" . $job['jobCount'] . "</td>";
 		if ($job['jobCount'] > 0 && fs_isCheckedIn($latestCheckin->createdAt)) {
-			echo "<td><span class=\"id\" style=\"display: none\">". $job['ID'] ."</span><span class=\"removeCitizen\">Bürger aus Stadt nehmen?</span></td>";
+			//echo "<td><span class=\"id\" style=\"display: none\">". $job['ID'] ."</span><span class=\"removeCitizen\">Bürger aus Stadt nehmen?</span></td>";
+			echo "<td>1</td>";
 		} else {
-			echo "<td>-</td>";
+			//echo "<td>-</td>";
+			echo "<td>0</td>";
 		}
 		if ($user->unusedCitizen > 0 && fs_isCheckedIn($latestCheckin->createdAt)) {
-			echo "<td><span class=\"id\" style=\"display: none\">". $job['ID'] ."</span><span class=\"addCitizen\">Bürger plazieren?</span></td>";
+			//echo "<td><span class=\"id\" style=\"display: none\">". $job['ID'] ."</span><span class=\"addCitizen\">Bürger plazieren?</span></td>";
+			echo "<td>1</td>";
 		} else {
-			echo "<td>-</td>";
+			//echo "<td>-</td>";
+			echo "<td>0</td>";
 		}
 		echo "</tr>";
 	}

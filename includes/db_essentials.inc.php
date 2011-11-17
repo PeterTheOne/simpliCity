@@ -119,18 +119,17 @@ function db_citizenInVenue($venueId) {
 
 function db_playersInVenue($venueId) {
 	db_connect();
-	$r = mysql_query("SELECT COUNT(UserID) FROM citizen WHERE VenueID='$venueId' GROUP BY UserID");
+	$r = mysql_query("SELECT COUNT(DISTINCT UserID) FROM citizen WHERE VenueID='$venueId'");
 	if (db_hasErrors($r)) {
 		db_disconnect();
 		return false;
 	}
 	$citizenGroupJob = array();
 	while ($line = mysql_fetch_array($r)) {
-	
-		$playersInVenue[] = $line['COUNT(UserID)'];
+		db_disconnect();
+		return $line["COUNT(DISTINCT UserID)"];
 	}
 	db_disconnect();
-	return $playersInVenue;
 }
 
 ?>

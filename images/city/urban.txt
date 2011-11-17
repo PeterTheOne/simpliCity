@@ -1,0 +1,6 @@
+church.png
+krankenhaus.png
+littlepark.png
+littleshop.png
+mehrfamilienhaus.png
+mehrfamilienhaus2.png

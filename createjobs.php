@@ -6,7 +6,7 @@ require_once("includes/essentials.inc.php");
 $jobs = array();
 $jobs[] = array(
 	'name' => 'Wissenschaftler', 
-	'description' => 'Der Wissenschaftler f&ouml;rdert treibt die Forschung an, verringert aber den G&ouml;tterglauben der Menschheit', 
+	'description' => 'Der Wissenschaftler treibt die Forschung an, verringert aber den G&ouml;tterglauben der Menschheit', 
 	'education' => 2, 'research' => 5, 'wealth' => 0, 'production' => 1, 'religion' => -3
 );
 $jobs[] = array(

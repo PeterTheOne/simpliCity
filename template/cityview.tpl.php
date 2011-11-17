@@ -1,12 +1,13 @@
 			<div id="landscape">
 				<?php
 					$self = fs_getSelfCheckinOne();
-					//printarray($self);
 					$venueID = $self->venue->id;
-					printarray(db_citizenInVenue($venueID));
-					printarray(db_playersInVenue($venueID));
-					printCityValues(db_citizenInVenue($venueID),1,$venueID);
-					//echo db_citizenInVenue($venueID);
+					printCityValues(db_citizenInVenue($venueID),db_playersInVenue($venueID),$venueID);
 				?>
-				<?php //require_once("canvas-anim.html"); ?>
+				<canvas id="canvas" width="100" height="100">
+			
+				</canvas>
+				<script type="text/javascript" src="script/functions.js"></script>
+				<script type="text/javascript" src="script/images.js"></script>
+				<script type="text/javascript" src="script/canvas.js"></script>
 			</div>

@@ -57,25 +57,25 @@ function printCityValues($citizencounts, $playercount, $venueID){
 	//=(LOG((($education + $research/($religion*$multiplicator) + $research/($religion*$multiplicator) + $wealth + $production)*$citizens)/10)*$multiplicator)
 	$temp = ($religion*$multiplicator == 0)? 1 : ($religion*$multiplicator);
 	$innerCity = (($education + $research/$temp + $research/$temp + $wealth + $production)*$citizens)/10;
-	$innerCity = ($innerCity <= 0)? 0 : log10($innerCity)*multiplicator;
+	$innerCity = ($innerCity <= 0)? 0 : log10($innerCity)*$multiplicator;
 	//= (LOG((($research^3) - $religion*$multiplicator + $production)*$citizens/10)/($multiplicator/1,3))
 	$industry = (pow($research,3) - $religion*$multiplicator + $production)*$citizens/10;
 	$industry = ($industry <= 0)? 0 : log10($industry)/($multiplicator/1.3);
 	//=(LOG(($education + $research + $wealth + $religion*$multiplicator)*$citizens)*$multiplicator)
 	$urban = ($education + $research + $wealth + $religion*$multiplicator)*$citizens;
-	$urban = ($urban <= 0)? 0 : log10($urban)*multiplicator;
+	$urban = ($urban <= 0)? 0 : log10($urban)*$multiplicator;
 	//= (LOG(($production + $religion*5*$multiplicator) )* $multiplicator)
 	$rural = $production + $religion*5*$multiplicator;
-	$rural = ($rural <= 0)? 0 : log10($rural)*multiplicator;
+	$rural = ($rural <= 0)? 0 : log10($rural)*$multiplicator;
 	
 	?>
 	
-	<div id="cityValues" style="display: table;">
+	<div id="cityValues" style="display: none;">
 		<p id="venueID"><?php echo $venueID; ?></p>
-		<p id="innerCity"><?php echo $innerCity; ?></p>
-		<p id="industry"><?php echo $industry; ?></p>
-		<p id="urban"><?php echo $urban; ?></p>
-		<p id="rural"><?php echo $rural; ?></p>
+		<p id="innerCity"><?php echo round($innerCity); ?></p>
+		<p id="industry"><?php echo round($industry); ?></p>
+		<p id="urban"><?php echo round($urban); ?></p>
+		<p id="rural"><?php echo round($rural); ?></p>
 	</div>
 	
 	<?php

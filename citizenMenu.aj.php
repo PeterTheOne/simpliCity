@@ -24,6 +24,8 @@ displayMenu($latestCheckin);
 echo "</div>";
 
 function displayMenu($latestCheckin) {
+	global $user;
+
 	if (!fs_isCheckedIn($latestCheckin->createdAt)) {
 		echo "<p>Du kannst keine Bürger plazieren oder entfernen, dein checkin ist zu lange her.</p>";
 	}

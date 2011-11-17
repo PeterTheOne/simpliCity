@@ -95,4 +95,35 @@ function db_citizenGroupJob($userId, $venueId) {
 	return true;
 }
 
+function db_citizenInVenue($venueId) {
+	db_connect();
+	$r = mysql_query("SELECT Job, COUNT(ID) FROM citizen WHERE VenueID='$venueId' GROUP BY Job");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$citizenGroupJob = array();
+	while ($line = mysql_fetch_array($r)) {
+		$citizenGroupJob[$line['Job']] = $line['COUNT(ID)'];
+	}
+	db_disconnect();
+	return $citizenGroupJob;
+}
+
+function db_playersInVenue($venueId) {
+	db_connect();
+	$r = mysql_query("SELECT COUNT(UserID) FROM citizen WHERE VenueID='$venueId' GROUP BY UserID");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$citizenGroupJob = array();
+	while ($line = mysql_fetch_array($r)) {
+	
+		$playersInVenue[] = $line['COUNT(UserID)'];
+	}
+	db_disconnect();
+	return $playersInVenue;
+}
+
 ?>

@@ -23,7 +23,7 @@ function db_disconnect(){
 function db_hasErrors($r) {
 	if(!$r){
 		if (PRINT_DB_ERRORS) {
-			echo "<p>error: " . mysql_error($r) . "</p>";
+			echo "<p>error: " . mysql_error() . "</p>";
 		}
 		return true;
 	}
@@ -80,19 +80,22 @@ function db_selectCitizenOfVenue($userId, $venueId) {
  *
 */
 function db_citizenGroupJob($userId, $venueId) {
-	global $citizenGroupJob;
 	db_connect();
-	$r = mysql_query("SELECT Job, COUNT(ID) FROM citizen WHERE UserID='$userId' AND VenueID='$venueId' GROUP BY Job");
+	$r = mysql_query("
+		SELECT jobs.*, 
+			(SELECT COUNT(*) FROM citizen WHERE citizen.Job=jobs.ID) AS jobCount
+		FROM jobs
+	");
 	if (db_hasErrors($r)) {
 		db_disconnect();
 		return false;
 	}
 	$citizenGroupJob = array();
 	while ($line = mysql_fetch_array($r)) {
-		$citizenGroupJob[$line['Job']] = $line['COUNT(ID)'];
+		$citizenGroupJob[] = $line;
 	}
 	db_disconnect();
-	return true;
+	return $citizenGroupJob;
 }
 
 function db_citizenInVenue($venueId) {

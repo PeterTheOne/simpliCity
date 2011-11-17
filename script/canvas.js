@@ -1,80 +1,111 @@
+
+
 var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
-
-var seed = document.getElementById("venueID").innerHTML;
-var innerCity = document.getElementById("innerCity").innerHTML;
-var industry = document.getElementById("industry").innerHTML;
-var urban = document.getElementById("urban").innerHTML;
-var rural = document.getElementById("rural").innerHTML;
-
-var canvas = document.getElementById("canvas");
-canvas.setAttribute("width", width);
-canvas.setAttribute("height", height);
-var context = canvas.getContext('2d');
-
+	
 var dx = 20;
 var dy = 10;
-var offx = 0;
-var offy = 0;
+var offx = parseInt(width/2);
+var offy = parseInt(height/2);
 
 var city;
-
-updateCity();
-
-function updateCity(){
-	city = buildCity(innerCity, industry, urban, rural, seed, 1);
-}
-
-draw(0);
-
-canvas.ontouchmove = move;
-canvas.onmousemove = move;
-canvas.ontouchstart = down;
-canvas.onmousedown = down;
-canvas.ontouchend = up;
-canvas.onmouseup = up;
-document.ontouchend = up;
-document.onmouseup = up;
-
 var mx = 0;
 var my = 0;
 var down = false;
 
-function down(e){
-	down = true;
-	var p;
-	if (e.touches) {
-		p = getCoords(e.touches[0]);
-	} else {
-		p = getCoords(e);
-	}
-	mx = p.x;
-	my = p.y;
-	return false;
-}
+var seed = "a";
+var innerCity = 0;
+var industry = 0;
+var urban = 0;
+var rural = 0;
 
-function move(e){
-	if(down){
+var canvas;
+var context;
+
+window.onload = function(){
+
+
+	seed = document.getElementById("venueID").innerHTML;
+	innerCity = document.getElementById("innerCity").innerHTML;
+	industry = document.getElementById("industry").innerHTML;
+	urban = document.getElementById("urban").innerHTML;
+	rural = document.getElementById("rural").innerHTML;
+
+	canvas = document.getElementById("canvas");
+	canvas.setAttribute("width", width);
+	canvas.setAttribute("height", height);
+	context = canvas.getContext('2d');
+
+	
+	
+	
+	updateCity();
+
+	canvas.ontouchmove = move;
+	canvas.onmousemove = move;
+	canvas.ontouchstart = down;
+	canvas.onmousedown = down;
+	canvas.ontouchend = up;
+	canvas.onmouseup = up;
+	document.ontouchend = up;
+	document.onmouseup = up;
+	document.getElementById("canvas").onfocus = focusme;
+	window.onresize = draw;
+	
+	function focusme(e){
+		updateCity();
+	}
+	
+	function down(e){
+		down = true;
 		var p;
 		if (e.touches) {
 			p = getCoords(e.touches[0]);
 		} else {
 			p = getCoords(e);
 		}
-		offx += p.x - mx;
-		offy += p.y - my;
 		mx = p.x;
 		my = p.y;
-		
-		draw(0);
+		return false;
 	}
-	return false;
+
+	function move(e){
+		if(down){
+			var p;
+			if (e.touches) {
+				p = getCoords(e.touches[0]);
+			} else {
+				p = getCoords(e);
+			}
+			offx += p.x - mx;
+			offy += p.y - my;
+			mx = p.x;
+			my = p.y;
+			
+			draw(0);
+		}
+		return false;
+	}
+
+	function up(e){
+		down = false;
+		return false;
+	}
+	
+	up();
 }
 
-function up(e){
-	down = false;
-	return false;
+function updateCity(){
+	seed = document.getElementById("venueID").innerHTML;
+	innerCity = document.getElementById("innerCity").innerHTML;
+	industry = document.getElementById("industry").innerHTML;
+	urban = document.getElementById("urban").innerHTML;
+	rural = document.getElementById("rural").innerHTML;
+	city = buildCity(innerCity, industry, urban, rural, seed, 1);
+	draw(0);
 }
+
+
 
 function getCoords(e) {
 	if (e.offsetX) {
@@ -95,6 +126,7 @@ function getCoords(e) {
 
 
 function draw(cFrame){
+	cFrame = 0;
 	cFrame++;
 	if(imagesReady()){
 		context.beginPath();

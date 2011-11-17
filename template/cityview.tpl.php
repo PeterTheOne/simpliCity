@@ -1,8 +1,6 @@
 			<div id="landscape">
 				<?php
-					$self = fs_getSelfCheckinOne();
-					$venueID = $self->venue->id;
-					printCityValues(db_citizenInVenue($venueID),db_playersInVenue($venueID),$venueID);
+					require_once("printCityValues.aj.php");
 				?>
 				<canvas id="canvas" width="100" height="100">
 			

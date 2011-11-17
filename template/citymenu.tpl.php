@@ -1,17 +1,35 @@
 			<script type="text/javascript" src="script/citymenu.js"></script>
+			<script type="text/javascript" src="script/citizenMenu.js"></script>
 			<div id="menu">
 				<div id="upperLeft">
-					<p class="button" id="cityBtn">c</p>
-					<p class="button" id="guildBtn">g</p>
-					<p class="button" id="statsBtn">s</p>
+					<div class="button" id="cityBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
+					<div class="button" id="guildBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
+					<div class="button" id="statsBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
 				</div>
 				<p id="cityname">
 					
 				</p>
 				<div id="lowerLeft">
-					<p class="button" id="addBtn">a</p>
+					<div class="button" id="addBtn"><img src="images/interface/addCitizenIcon.png" alt="add citizen"/></div>
 				</div>
 				<div id="lowerRight">
-					<div class="button" id="setupBtn">s</div>
+					<div class="button" id="setupBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
 				</div>
+			</div>
+			<div id="overlay">
+				<div id="citizenTable">
+				
+				</div>
+				<div id="citizenTitle">
+					<div id="goBack"><img src="images/interface/left.png" alt="left"/></div>
+					<div id="goForward"><img src="images/interface/right.png" alt="right"/></div>
+					<div id="citizenTitles">
+						<div id="lastTitle"></div>
+						<div id="nextTitle"></div>
+						<div id="currentTitle"></div>
+					</div>
+				</div>
+				<div id="citizenDescription"></div>
+				<div id="removeCitizen" class="button"><img src="images/interface/minus.png" alt="remove"/></div>
+				<div id="addCitizen" class="button"><img src="images/interface/plus.png" alt="add"/></div>
 			</div>

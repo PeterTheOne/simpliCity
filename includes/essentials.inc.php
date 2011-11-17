@@ -26,6 +26,18 @@ function printarray($arr) {
 
 function printCityValues($citizencounts, $playercount, $venueID){
 	if(!is_array($citizencounts) || $playercount <= 0){
+		?>
+	
+	<div id="cityValues" style="display: none;">
+		<p id="venueID">a</p>
+		<p id="innerCity">0</p>
+		<p id="industry">0</p>
+		<p id="urban">0</p>
+		<p id="rural">0</p>
+	</div>
+	
+	<?php
+		
 		return false;
 	}
 	require_once("includes/db_essentials.inc.php");
@@ -71,7 +83,7 @@ function printCityValues($citizencounts, $playercount, $venueID){
 	?>
 	
 	<div id="cityValues" style="display: none;">
-		<p id="venueID"><?php echo $venueID; ?></p>
+		<p id="venueID"><?php echo $venueID; ?>a</p>
 		<p id="innerCity"><?php echo round($innerCity); ?></p>
 		<p id="industry"><?php echo round($industry); ?></p>
 		<p id="urban"><?php echo round($urban); ?></p>

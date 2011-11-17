@@ -22,7 +22,7 @@ function fs_setup($authtoken = null){
  *
 */
 function fs_hasErrors($meta) {
-	if(isset($meta->code) && $err >= 400 && $err <= 500){
+	if(isset($meta->code) && $meta->code >= 400 && $meta->code <= 500){
 		if (PRINT_FS_ERRORS) {
 			echo "<p>error-code: $meta->code</p>";
 			echo "<p>$meta->errorType: $meta->errorDetail</p>";

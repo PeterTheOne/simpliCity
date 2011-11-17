@@ -1,18 +1,25 @@
 <?php
 
-require_once("includes/database.inc.php");
+require_once("includes/db_essentials.inc.php");
 require_once("includes/essentials.inc.php");
 
 if(isset($_GET["confirm"]) && sanitizeFilter($_GET["confirm"]) == "true"){
 	db_connect();
 
-	mysql_query(
+	$r = mysql_query(
 		"DROP TABLE IF EXISTS users;"
 	);
+	db_hasErrors($r);
 
-	mysql_query(
+	$r = mysql_query(
 		"DROP TABLE IF EXISTS citizen;"
 	);
+	db_hasErrors($r);
+
+	$r = mysql_query(
+		"DROP TABLE IF EXISTS jobs;"
+	);
+	db_hasErrors($r);
 
 	db_disconnect();
 } else {

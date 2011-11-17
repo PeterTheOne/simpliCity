@@ -83,7 +83,7 @@ function db_citizenGroupJob($userId, $venueId) {
 	db_connect();
 	$r = mysql_query("
 		SELECT jobs.*, 
-			(SELECT COUNT(*) FROM citizen WHERE citizen.Job=jobs.ID) AS jobCount
+			(SELECT COUNT(*) FROM citizen WHERE citizen.UserID='$userId' AND citizen.Job=jobs.ID) AS jobCount
 		FROM jobs
 	");
 	if (db_hasErrors($r)) {
@@ -100,14 +100,18 @@ function db_citizenGroupJob($userId, $venueId) {
 
 function db_citizenInVenue($venueId) {
 	db_connect();
-	$r = mysql_query("SELECT Job, COUNT(ID) FROM citizen WHERE VenueID='$venueId' GROUP BY Job");
+	$r = mysql_query("
+		SELECT jobs.*, 
+			(SELECT COUNT(*) FROM citizen WHERE citizen.Job=jobs.ID) AS jobCount
+		FROM jobs
+	");
 	if (db_hasErrors($r)) {
 		db_disconnect();
 		return false;
 	}
 	$citizenGroupJob = array();
 	while ($line = mysql_fetch_array($r)) {
-		$citizenGroupJob[$line['Job']] = $line['COUNT(ID)'];
+		$citizenGroupJob[$line["ID"]] = $line["jobCount"];
 	}
 	db_disconnect();
 	return $citizenGroupJob;

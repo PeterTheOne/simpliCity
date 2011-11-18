@@ -64,7 +64,6 @@ function fs_getSelfCheckins($num = 1) {
 					array('limit' => $num)
 	);
 	$details = json_decode($request, false);
-	//printarray($details);
 	if (fs_hasErrors($details->meta)) return false;
 	return $details->response->checkins->items;
 }

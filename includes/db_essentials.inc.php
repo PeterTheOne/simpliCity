@@ -12,12 +12,15 @@ function db_connect() {
 	$dbname = "a3943217_simplic";
 	$dbuser = "a3943217_simplic";
 	$dbpass = "hoooray11";
-	mysql_connect($dbhost,$dbuser,$dbpass);
-	mysql_select_db($dbname);
+	$r = mysql_connect($dbhost,$dbuser,$dbpass);
+	db_hasErrors($r);
+	$r = mysql_select_db($dbname);
+	db_hasErrors($r);
 }
 
 function db_disconnect(){
-	mysql_close();
+	$r = mysql_close();
+	db_hasErrors($r);
 }
 
 /*

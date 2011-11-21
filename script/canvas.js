@@ -147,22 +147,20 @@ function draw(cFrame){
 				context.drawImage(grass, (-grass.width+i*(grass.width)+(offx%grass.width)),(-grass.height+j*(grass.height)+(offy%grass.height)));
 			}
 		}
-		
 		//var framecount = img[1].width/40;
 		for(var i = 0; i < city.length; i++){
 			for(var j = 0; j < city[i].length; j++){
 				//if(city[i][j] != 0 && city[i][j] != null) context.drawImage(img[city[i][j]], 40*((cFrame+Math.pow(i, j))%framecount), 0, 40, img[city[i][j]].height, cx+offx, cy+offy-img[city[i][j]].height, img[city[i][j]].width/framecount, img[city[i][j]].height);
 				var currentimg = null;
-				if(city[i][j] == 1){
+				if(city[i][j] == 4){
 					currentimg = imgInnerCity[rndInnerCity.intRand(0,imgInnerCity.length-1)];
-				} else if(city[i][j] == 2){
-					currentimg = imgIndustry[rndIndustry.intRand(0,imgIndustry.length-1)];
 				} else if(city[i][j] == 3){
+					currentimg = imgIndustry[rndIndustry.intRand(0,imgIndustry.length-1)];
+				} else if(city[i][j] == 2){
 					currentimg = imgUrban[rndUrban.intRand(0,imgUrban.length-1)];
-				} else if(city[i][j] == 4){
+				} else if(city[i][j] == 1){
 					currentimg = imgRural[rndRural.intRand(0,imgRural.length-1)];
 				}
-				
 				if(currentimg != null){
 					context.drawImage(currentimg, cx+offx, cy+offy-currentimg.height, currentimg.width, currentimg.height);
 				}
@@ -174,7 +172,6 @@ function draw(cFrame){
 			cx = sx;
 			cy = sy;
 		}
-		
 		var coffx = (offx*2+cFrame/2)%clouds.width;
 		var coffy = (offy*2+cFrame/4)%clouds.height;
 		for(var i = 0; i <= canvas.width/clouds.width+2; i++){

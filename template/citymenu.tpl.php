@@ -12,6 +12,9 @@
 				<div id="lowerLeft">
 					<div class="button" id="addBtn"><img src="images/interface/addCitizenIcon.png" alt="add citizen"/></div>
 				</div>
+				<p id="citizenCount">
+					
+				</p>
 				<div id="lowerRight">
 					<div class="button" id="setupBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
 				</div>

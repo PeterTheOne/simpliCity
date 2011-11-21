@@ -97,6 +97,7 @@ window.onload = function(){
 
 function updateCity(){
 	seed = document.getElementById("venueID").innerHTML;
+	document.getElementById("cityname").innerHTML = document.getElementById("venueName").innerHTML;
 	innerCity = document.getElementById("innerCity").innerHTML;
 	industry = document.getElementById("industry").innerHTML;
 	urban = document.getElementById("urban").innerHTML;

@@ -5,10 +5,10 @@
 					<div class="button" id="cityBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
 					<div class="button" id="guildBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
 					<div class="button" id="statsBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
+					<p id="cityname">
+						test
+					</p>
 				</div>
-				<p id="cityname">
-					
-				</p>
 				<div id="lowerLeft">
 					<div class="button" id="addBtn"><img src="images/interface/addCitizenIcon.png" alt="add citizen"/></div>
 				</div>

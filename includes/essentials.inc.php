@@ -24,12 +24,13 @@ function printarray($arr) {
 }
 
 
-function printCityValues($citizencounts, $playercount, $venueID){
+function printCityValues($citizencounts, $playercount, $venueID, $venueName){
 	if(!is_array($citizencounts) || $playercount <= 0){
 		?>
 	
 	<div id="cityValues" style="display: none;">
 		<p id="venueID">a</p>
+		<p id="venueName">Please check in at any location in Foursquare!</p>
 		<p id="innerCity">0</p>
 		<p id="industry">0</p>
 		<p id="urban">0</p>
@@ -83,7 +84,8 @@ function printCityValues($citizencounts, $playercount, $venueID){
 	?>
 	
 	<div id="cityValues" style="display: none;">
-		<p id="venueID"><?php echo $venueID; ?>a</p>
+		<p id="venueID"><?php echo $venueID; ?></p>
+		<p id="venueName"><?php echo $venueName; ?></p>
 		<p id="innerCity"><?php echo round($innerCity); ?></p>
 		<p id="industry"><?php echo round($industry); ?></p>
 		<p id="urban"><?php echo round($urban); ?></p>

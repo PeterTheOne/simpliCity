@@ -8,5 +8,6 @@ if(!isset($_SESSION)){
 }
 $self = fs_getSelfCheckinOne();
 $venueID = $self->venue->id;
-printCityValues(db_citizenInVenue($venueID),db_playersInVenue($venueID),$venueID);
+$venueName = $self->venue->name;
+printCityValues(db_citizenInVenue($venueID),db_playersInVenue($venueID),$venueID, $venueName);
 ?>

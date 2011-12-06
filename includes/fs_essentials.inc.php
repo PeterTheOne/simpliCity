@@ -34,12 +34,24 @@ function fs_hasErrors($meta) {
 
 /*
  *
+ *	returns userID
+ *
+*/
+function fs_getUserID() {
+	global $foursquare;
+	$request = $foursquare->GetPrivate("users/self");
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return $details->response->user->id;
+}
+
+/*
+ *
  *	checks the errorCode and optionally printsErrors
- *	TODO: remove '* 1000' it is only for debug
  *
 */
 function fs_isCheckedIn($checkinTime) {
-	return $checkinTime > time() - CHECKIN_TIME * 1000;
+	return $checkinTime > time() - CHECKIN_TIME;
 }
 
 /*
@@ -57,15 +69,40 @@ function fs_getSelfCheckinOne() {
  *	returns latest checkins
  *
 */
-function fs_getSelfCheckins($num = 1) {
+function fs_getSelfCheckins($limit = 1) {
 	global $foursquare;
 	$request = $foursquare->GetPrivate(
 					"users/self/checkins", 
-					array('limit' => $num)
+					array('limit' => $limit)
 	);
 	$details = json_decode($request, false);
 	if (fs_hasErrors($details->meta)) return false;
 	return $details->response->checkins->items;
+}
+
+/*
+ *
+ *	returns latest checkins
+ *
+*/
+function fs_getVenuesExplore($ll, $limit = 5) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"venues/explore", 
+					array(
+						'limit' => $limit, 
+						'll' => $ll
+					)
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	foreach ($details->response->groups as $group) {
+		if ($group->type == "recommended") {
+			return $group->items;
+		}
+	}
+	//return $details->response->groups[0]->items;
+	return false;
 }
 
 ?>

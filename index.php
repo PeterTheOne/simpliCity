@@ -10,6 +10,9 @@
 	require_once("User.class.php");
 	
 	fs_setup($_SESSION["authtoken"]);
+	if(!isset($_SESSION['userid'])) {
+		$_SESSION['userid'] = fs_getUserID();	
+	}
 	checkAuthentication();
 	
 	/*
@@ -44,76 +47,58 @@
 	 *
 	*/
 	function checkUser(){
-		
 		global $foursquare;
 		
-		$request = $foursquare->GetPrivate("users/self");
-		$details = json_decode($request);
+		$userID = $_SESSION['userid'];
+		$token = $_SESSION["authtoken"];
+		$time = date("Y-m-d");
+		$citizen = CITIZEN_STARTUP;
 		
-		//printarray($details);
+		db_connect();
 		
-		$err = isset($details->meta->code)? $details->meta->code : 0;
-		if($err >= 400 && $err <= 500){
-			//echo $err;
-			//echo "<p>".$details->meta->errorType.": ".$details->meta->errorDetail."</p>";
-			//TODO: if token is invalid, redirect to login/out
-			return false;
+		if($result = mysql_query(
+			"SELECT * FROM users WHERE ID='$userID'"
+		)){
+			
+			$exists = false;
+			while ($line = mysql_fetch_array($result)){
+				$exists = true;
+				//printarray($line);
+				$setToken = "";
+				if($line["Token"] != $token){
+					$setToken = "Token='$token',";
+				}
+				$alterCitizen = "";
+				if($line["LoginDate"] != $time){
+					$citizen = $line["UnusedCitizen"] + CITIZEN_INCREASE;
+					$alterCitizen = "UnusedCitizen='$citizen',";
+				}
+				if($setToken != "" || $alterCitizen != "" || $line["LoginDate"] != $time){
+					mysql_query(
+						"UPDATE users SET $setToken $alterCitizen LoginDate='$time' WHERE ID='$userID'"
+					);
+				} else {
+					//echo "nothing changed";
+				}
+			}
+			
+			if(!$exists){
+				mysql_query(
+					"INSERT INTO users (ID,Token,LoginDate,UnusedCitizen) VALUES ('$userID','$token','$time','$citizen')"
+				);
+			}
 			
 		} else {
 			
-			$userID = $details->response->user->id;
-			$token = $_SESSION["authtoken"];
-			$time = date("Y-m-d");
-			$citizen = CITIZEN_STARTUP;
-			
-			db_connect();
-			
-			if($result = mysql_query(
-				"SELECT * FROM users WHERE ID='$userID'"
-			)){
-				
-				$exists = false;
-				while ($line = mysql_fetch_array($result)){
-					$exists = true;
-					//printarray($line);
-					$setToken = "";
-					if($line["Token"] != $token){
-						$setToken = "Token='$token',";
-					}
-					$alterCitizen = "";
-					if($line["LoginDate"] != $time){
-						$citizen = $line["UnusedCitizen"] + CITIZEN_INCREASE;
-						$alterCitizen = "UnusedCitizen='$citizen',";
-					}
-					if($setToken != "" || $alterCitizen != "" || $line["LoginDate"] != $time){
-						mysql_query(
-							"UPDATE users SET $setToken $alterCitizen LoginDate='$time' WHERE ID='$userID'"
-						);
-					} else {
-						//echo "nothing changed";
-					}
-				}
-				
-				if(!$exists){
-					mysql_query(
-						"INSERT INTO users (ID,Token,LoginDate,UnusedCitizen) VALUES ('$userID','$token','$time','$citizen')"
-					);
-				}
-				
-			} else {
-				
-				db_disconnect();
-				return false;
-			
-			}
-			
 			db_disconnect();
-			$_SESSION['userid'] = $userID;			
-			return true;
+			return false;
+		
 		}
 		
-	}
-	
+		db_disconnect();		
+		return true;
+		
+	}	
 	
 	/*
 	 *
@@ -121,7 +106,12 @@
 	 *
 	*/
 	require_once("template/header.tpl.php");
-	require_once("template/cityview.tpl.php");
+	if (fs_isCheckedIn(fs_getSelfCheckinOne()->createdAt)) {
+		//TODO: wtf restructure...
+		require_once("template/cityview.tpl.php");
+	} else {
+		require_once("venuelist.php");
+	}
 	require_once("template/citymenu.tpl.php");
 	require_once("template/footer.tpl.php");
 ?>

@@ -25,23 +25,8 @@ function printarray($arr) {
 
 
 function printCityValues($citizencounts, $playercount, $venueID, $venueName){
-	if(!is_array($citizencounts) || $playercount <= 0){
-		?>
-	
-	<div id="cityValues" style="display: none;">
-		<p id="venueID">a</p>
-		<p id="venueName">Please check in at any location in Foursquare!</p>
-		<p id="innerCity">0</p>
-		<p id="industry">0</p>
-		<p id="urban">0</p>
-		<p id="rural">0</p>
-	</div>
-	
-	<?php
-		
-		return false;
-	}
 	require_once("includes/db_essentials.inc.php");
+	
 	$citizens = 0;
 	$multiplicator = sqrt($playercount);
 	$education = 0;

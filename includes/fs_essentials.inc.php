@@ -101,8 +101,28 @@ function fs_getVenuesExplore($ll, $limit = 5) {
 			return $group->items;
 		}
 	}
-	//return $details->response->groups[0]->items;
 	return false;
 }
+
+/*
+ *
+ *	checksin into venue
+ *
+*/
+function fs_checkin($venueid) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"checkins/add", 
+					array(
+						'venueId' => $venueid, 
+						'shout' => 'checked in with simpliCity'
+					),
+					true
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return true;
+}
+
 
 ?>

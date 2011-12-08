@@ -110,7 +110,12 @@
 		//TODO: wtf restructure...
 		require_once("template/cityview.tpl.php");
 	} else {
-		require_once("venuelist.php");
+		//TODO: fix these include things
+		if (isset($_GET['checkinid'])) {
+			require_once("checkin.php");
+		} else {
+			require_once("venuelist.php");
+		}
 	}
 	require_once("template/citymenu.tpl.php");
 	require_once("template/footer.tpl.php");

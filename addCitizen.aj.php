@@ -17,7 +17,7 @@ db_selectUser($_SESSION['userid']);
 $citizenGroupJob = db_selectCitizenOfVenue($_SESSION['userid'], $venue->id);
 
 // addCitizen
-$job = sanitizeFilter($_POST['id']);
+$job = sanitize($_POST['id']);
 $result = addCitizen($user, $venue->id, $latestCheckin->createdAt, $job);
 
 echo "<div style=\"padding-top:50px\">";

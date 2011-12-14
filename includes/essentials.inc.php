@@ -8,7 +8,7 @@ require_once("includes/lib/FoursquareAPI.class.php");
  *	use this to sanitize $_POST and $_GET input
  *
 */
-function sanitizeFilter($str) {
+function sanitize($str) {
 	return htmlspecialchars($str, ENT_QUOTES, "UTF-8");
 }
 

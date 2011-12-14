@@ -2,7 +2,7 @@
 	session_start();
 	
 	if(isset($_GET["code"])){
-		$_SESSION["code"] = sanitizeFilter($_GET["code"]);
+		$_SESSION["code"] = sanitize($_GET["code"]);
 	}
 	
 	require_once("includes/config.inc.php");

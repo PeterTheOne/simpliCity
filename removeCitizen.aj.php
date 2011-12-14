@@ -16,7 +16,7 @@ $venue = $latestCheckin->venue;
 db_selectUser($_SESSION['userid']);
 
 // removeCitizen 
-$job = sanitizeFilter($_POST['id']);
+$job = sanitize($_POST['id']);
 $result = removeCitizen($venue->id, $latestCheckin->createdAt,  $job);
 
 echo "<div style=\"padding-top:50px\">";

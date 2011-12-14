@@ -3,7 +3,7 @@
 require_once("includes/db_essentials.inc.php");
 require_once("includes/essentials.inc.php");
 
-if(isset($_GET["confirm"]) && sanitizeFilter($_GET["confirm"]) == "true"){
+if(isset($_GET["confirm"]) && sanitize($_GET["confirm"]) == "true"){
 	db_connect();
 
 	$r = mysql_query(

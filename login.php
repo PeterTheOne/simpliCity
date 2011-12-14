@@ -9,7 +9,7 @@
 		
 	} else if(isset($_GET["token"])){
 	
-		$_SESSION["authtoken"] = sanitizeFilter($_GET["token"]);
+		$_SESSION["authtoken"] = sanitize($_GET["token"]);
 		header("Location: index.php");
 		
 	} else {

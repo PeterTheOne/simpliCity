@@ -3,7 +3,7 @@
 require_once("includes/essentials.inc.php");
 require_once("includes/fs_essentials.inc.php");
 
-$result = fs_checkin(sanitizeFilter($_GET['checkinid']));
+$result = fs_checkin(sanitize($_GET['checkinid']));
 ?>
 
 <div>

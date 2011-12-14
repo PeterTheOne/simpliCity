@@ -25,7 +25,7 @@ $jobs[] = array(
 	'education' => 2, 'research' => -1, 'wealth' => 2, 'production' => 0, 'religion' => 5
 );
 
-if(isset($_GET["insert"]) && sanitizeFilter($_GET["insert"]) == "true") {
+if(isset($_GET["insert"]) && sanitize($_GET["insert"]) == "true") {
 	db_connect();
 	foreach ($jobs as $job) {
 		$r = mysql_query(
@@ -45,7 +45,7 @@ if(isset($_GET["insert"]) && sanitizeFilter($_GET["insert"]) == "true") {
 		db_hasErrors($r);
 	}
 	db_disconnect();
-} else if (isset($_GET["update"]) && sanitizeFilter($_GET["update"]) == "true") {
+} else if (isset($_GET["update"]) && sanitize($_GET["update"]) == "true") {
 	db_connect();
 	foreach ($jobs as $job) {
 		$r = mysql_query(

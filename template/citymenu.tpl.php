@@ -6,7 +6,7 @@
 					<div class="button" id="guildBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
 					<div class="button" id="statsBtn"><img src="images/interface/randomButton.png" alt="unknown"/></div>
 					<p id="cityname">
-						test
+						&nbsp;
 					</p>
 				</div>
 				<div id="lowerLeft">

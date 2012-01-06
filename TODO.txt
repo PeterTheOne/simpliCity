@@ -5,12 +5,12 @@ Anderl:
 	styles/*
 		Styles anpassen/umstrukturieren
 		
-	citizenMenu.aj.php
-		anpassen
-		
 	City: Namen Anzeigen, Anzahl verbleibender Bürger anzeigen
 	City Overlay: schließen Knopf, Anzahl Bürger in Stadt gesammt
 	Script: mehr häuser! direktes verteilen der verschiedenen gebäude, nicht zweistufig
+	
+	aj_*
+		anpassen, namensgeung etc.
 
 Peter:
 	template/view_stats.tpl.php

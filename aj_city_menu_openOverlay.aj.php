@@ -16,7 +16,6 @@ $venue = $latestCheckin->venue;
 //TODO: error handling
 db_selectUser($_SESSION['userid']);
 
-//echo "<script type=\"text/javascript\" src=\"script/citizenMenu.js\"></script>";	//this line is EVIL! every time you load this file via ajax, the script is loaded again and again and again, and all the events in the script are triggered multiple times!!!
 echo "<div style=\"padding-top:50px\">";
 
 displayMenu($latestCheckin);

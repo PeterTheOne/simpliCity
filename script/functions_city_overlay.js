@@ -1,24 +1,6 @@
 $current = 0;
 
 $(function(){
-	/*$(".addCitizen").css("cursor","pointer");
-	$(".removeCitizen").css("cursor","pointer");
-	$(".addCitizen").bind("touchend", function(){
-		$(".addCitizen").click();
-	});
-	$(".addCitizen").click(function(){
-		$.post("addCitizen.aj.php", {id: $(this).parent().children(".id").html()}, function(data){
-			$("#landscape").html(data);
-		});
-	});
-	$(".removeCitizen").bind("touchend", function(){
-		$(".removeCitizen").click();
-	});
-	$(".removeCitizen").click(function(){
-		$.post("removeCitizen.aj.php", {id: $(this).parent().children(".id").html()}, function(data){
-			$("#landscape").html(data);
-		});
-	});*/
 	
 	$count = $(".jobentry").length;
 	updateCitizenMenu();
@@ -48,9 +30,9 @@ $(function(){
 		//$("#addCitizen").click();
 	});
 	$("#addCitizen").click(function(){
-		$.post("aj_addCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
+		$.post("aj_city_overlay_addCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
 			$("#cityValues").remove();
-			$.post("aj_printCityValues.aj.php", function(data){
+			$.post("aj_city_overlay_printCityValues.aj.php", function(data){
 				$("#landscape").append(data);
 				$("#overlay").hide();
 				$("#canvas").focus();
@@ -62,9 +44,9 @@ $(function(){
 		//$("#removeCitizen").click();
 	});
 	$("#removeCitizen").click(function(){
-		$.post("aj_removeCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
+		$.post("aj_city_overlay_removeCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
 			$("#cityValues").remove();
-			$.post("aj_printCityValues.aj.php", function(data){
+			$.post("aj_city_overlay_printCityValues.aj.php", function(data){
 				$("#landscape").append(data);
 				$("#overlay").hide();
 				$("#canvas").focus();

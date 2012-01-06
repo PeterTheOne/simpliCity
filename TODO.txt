@@ -1,6 +1,4 @@
 Anderl:
-	script/*
-		Scripte umstrukturieren
 		
 	styles/*
 		Styles anpassen/umstrukturieren
@@ -10,7 +8,7 @@ Anderl:
 	Script: mehr häuser! direktes verteilen der verschiedenen gebäude, nicht zweistufig
 	
 	aj_*
-		anpassen, namensgeung etc.
+		anpassen
 
 Peter:
 	template/view_stats.tpl.php

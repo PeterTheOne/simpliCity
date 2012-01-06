@@ -6,9 +6,9 @@
 				<canvas id="canvas" width="100" height="100">
 			
 				</canvas>
-				<script type="text/javascript" src="script/functions.js"></script>
-				<script type="text/javascript" src="script/images.js"></script>
-				<script type="text/javascript" src="script/canvas.js"></script>
+				<script type="text/javascript" src="script/functions_city.js"></script>
+				<script type="text/javascript" src="script/functions_city_images.js"></script>
+				<script type="text/javascript" src="script/functions_city_canvas.js"></script>
 			</div>
 			<div id="menu">
 				<?php
@@ -17,8 +17,8 @@
 				<p id="cityname">
 					&nbsp;
 				</p>
-				<script type="text/javascript" src="script/citymenu.js"></script>
-				<script type="text/javascript" src="script/citizenMenu.js"></script>
+				<script type="text/javascript" src="script/functions_city_menu.js"></script>
+				<script type="text/javascript" src="script/functions_city_overlay.js"></script>
 			
 				<div id="lowerLeft">
 					<div class="button" id="addBtn"><img src="images/interface/addCitizenIcon.png" alt="add citizen"/></div>

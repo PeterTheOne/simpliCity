@@ -1,5 +1,5 @@
 $(function(){
-	$.post("aj_citizenMenu.aj.php", function(data){
+	$.post("aj_city_menu_openOverlay.aj.php", function(data){
 		$("#citizenTable").html(data);
 	});
 	
@@ -7,7 +7,7 @@ $(function(){
 		//$("#addBtn").click();
 	});
 	$("#addBtn").click(function(){
-		$.post("aj_citizenMenu.aj.php", function(data){
+		$.post("aj_city_menu_openOverlay.aj.php", function(data){
 			$("#citizenTable").html(data);
 			$("#overlay").show();
 		});

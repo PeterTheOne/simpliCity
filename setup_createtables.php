@@ -1,6 +1,6 @@
 <?php
 
-require_once("includes/db_essentials.inc.php");
+require_once("includes/essentials_db.inc.php");
 
 db_connect();
 

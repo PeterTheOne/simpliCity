@@ -4,8 +4,8 @@ session_start();
 require_once("includes/config.inc.php");
 
 require_once("includes/essentials.inc.php");
-require_once("includes/fs_essentials.inc.php");
-require_once("includes/db_essentials.inc.php");
+require_once("includes/essentials_fs.inc.php");
+require_once("includes/essentials_db.inc.php");
 
 // fetch from fs
 fs_setup($_SESSION['authtoken']);

@@ -1,6 +1,6 @@
 <?php
 
-require_once("User.class.php");
+require_once("includes/User.class.inc.php");
 
 function db_connect() {
 	$dbname="simplicity";

@@ -1,0 +1,20 @@
+Anderl:
+	script/*
+		Scripte umstrukturieren
+		
+	styles/*
+		Styles anpassen/umstrukturieren
+		
+	citizenMenu.aj.php
+		anpassen
+		
+	City: Namen Anzeigen, Anzahl verbleibender Bürger anzeigen
+	City Overlay: schließen Knopf, Anzahl Bürger in Stadt gesammt
+	Script: mehr häuser! direktes verteilen der verschiedenen gebäude, nicht zweistufig
+
+Peter:
+	template/view_stats.tpl.php
+		Statistiken über Spieler anzeigen:
+			Anzahl verteilter Bürger, Aufschlüsselung der verteilten Bürger, Anzahl besuchter/verwendeter Städte, Top Städte des Bürgers etc.
+		bei aufwendigeren Funktionen bitte includes/functions_stats.inc.php anlegen und verwenden
+		Code im tpl file oberhalb des menu divs eintragen.

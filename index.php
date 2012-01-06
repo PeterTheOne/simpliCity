@@ -5,9 +5,11 @@
 	
 	require_once("includes/lib/FoursquareAPI.class.php");
 	require_once("includes/essentials.inc.php");
-	require_once("includes/fs_essentials.inc.php");
-	require_once("includes/db_essentials.inc.php");
-	require_once("User.class.php");
+	require_once("includes/essentials_fs.inc.php");
+	require_once("includes/essentials_db.inc.php");
+	require_once("includes/User.class.inc.php");
+	
+	require_once("includes/functions_index.inc.php");
 	
 	fs_setup($_SESSION["authtoken"]);
 	if(!isset($_SESSION['userid'])) {
@@ -17,106 +19,29 @@
 	
 	/*
 	 *
-	 *	check if the user token has been checked
-	 *	in this session and today
-	 *	sets AccessToken
-	 *
-	*/
-	function checkAuthentication() {
-		global $foursquare;
-	
-		if (!isset($_SESSION['authtoken'])) {
-			header("Location: logout.php");
-		} else {
-			$foursquare->SetAccessToken($_SESSION["authtoken"]);
-			if (!isset($_SESSION['authenticated']) || 
-					$_SESSION['authenticated'] !== date("Y-m-d")) {
-				if (checkUser()) {
-					$_SESSION['authenticated'] = date("Y-m-d");
-				} else {
-					header("Location: logout.php");
-				}
-			}
-		}
-	}	
-	
-	/*
-	 *
-	 *	check if Token is valid and did not change
-	 *	check users Timestamp and give him new citizens
-	 *
-	*/
-	function checkUser(){
-		global $foursquare;
-		
-		$userID = $_SESSION['userid'];
-		$token = $_SESSION["authtoken"];
-		$time = date("Y-m-d");
-		$citizen = CITIZEN_STARTUP;
-		
-		db_connect();
-		
-		if($result = mysql_query(
-			"SELECT * FROM users WHERE ID='$userID'"
-		)){
-			
-			$exists = false;
-			while ($line = mysql_fetch_array($result)){
-				$exists = true;
-				//printarray($line);
-				$setToken = "";
-				if($line["Token"] != $token){
-					$setToken = "Token='$token',";
-				}
-				$alterCitizen = "";
-				if($line["LoginDate"] != $time){
-					$citizen = $line["UnusedCitizen"] + CITIZEN_INCREASE;
-					$alterCitizen = "UnusedCitizen='$citizen',";
-				}
-				if($setToken != "" || $alterCitizen != "" || $line["LoginDate"] != $time){
-					mysql_query(
-						"UPDATE users SET $setToken $alterCitizen LoginDate='$time' WHERE ID='$userID'"
-					);
-				} else {
-					//echo "nothing changed";
-				}
-			}
-			
-			if(!$exists){
-				mysql_query(
-					"INSERT INTO users (ID,Token,LoginDate,UnusedCitizen) VALUES ('$userID','$token','$time','$citizen')"
-				);
-			}
-			
-		} else {
-			
-			db_disconnect();
-			return false;
-		
-		}
-		
-		db_disconnect();		
-		return true;
-		
-	}	
-	
-	/*
-	 *
 	 *	draw the page
 	 *
 	*/
-	require_once("template/header.tpl.php");
-	if (fs_isCheckedIn(fs_getSelfCheckinOne()->createdAt)) {
-		//TODO: wtf restructure...
-		require_once("template/cityview.tpl.php");
-	} else {
-		//TODO: fix these include things
-		if (isset($_GET['checkinid'])) {
-			require_once("checkin.php");
-		} else {
-			require_once("venuelist.php");
+	require_once("template/element_header.tpl.php");
+	
+	if(!isset($_GET["view"]) || $_GET["view"] == "city"){			//nicht definiert (neu eingeloggt) oder city-view gewählt
+		if (fs_isCheckedIn(fs_getSelfCheckinOne()->createdAt)) {	//letzter checkin vor kurzem -> city-view
+			require_once("template/view_city.tpl.php");
+		} else {													//letzter checkin zu lange vergangen -> list-view
+			//TODO: Notiz dass eingecheckt werden muss
+			require_once("template/view_list.tpl.php");
 		}
+	} else if($_GET["view"] == "list"){								//nutzer wählt list-view
+		require_once("template/view_list.tpl.php");
+	} else if($_GET["view"] == "stats"){							//nutzer wählt statistiken
+		require_once("template/view_stats.tpl.php");			//TODO: Stats Seite
+	} else if($_GET["view"] == "setup"){							//nutzer wählt einstellungen
+		require_once("template/view_setup.tpl.php");			//TODO: Setup Seite oder entfernen
+	} else if($_GET["view"] == "checkin"){							//neuer checkin
+		require_once("template/view_checkin.tpl.php");
+	} else {														//ungültige eingabe -> liste darstellen
+		require_once("template/view_list.tpl.php");
 	}
-	require_once("template/citymenu.tpl.php");
-	require_once("template/footer.tpl.php");
+	
+	require_once("template/element_footer.tpl.php");
 ?>

@@ -2,9 +2,9 @@
 session_start();
 
 require_once("includes/essentials.inc.php");
-require_once("includes/fs_essentials.inc.php");
-require_once("includes/db_essentials.inc.php");
-require_once("User.class.php");
+require_once("includes/essentials_fs.inc.php");
+require_once("includes/essentials_db.inc.php");
+require_once("includes/User.class.inc.php");
 
 // fetch from fs
 fs_setup($_SESSION['authtoken']);

@@ -1,6 +1,6 @@
 <?php
 
-require_once("includes/db_essentials.inc.php");
+require_once("includes/essentials_db.inc.php");
 require_once("includes/essentials.inc.php");
 
 if(isset($_GET["confirm"]) && sanitize($_GET["confirm"]) == "true"){

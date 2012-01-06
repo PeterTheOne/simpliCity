@@ -48,9 +48,9 @@ $(function(){
 		//$("#addCitizen").click();
 	});
 	$("#addCitizen").click(function(){
-		$.post("addCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
+		$.post("aj_addCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
 			$("#cityValues").remove();
-			$.post("printCityValues.aj.php", function(data){
+			$.post("aj_printCityValues.aj.php", function(data){
 				$("#landscape").append(data);
 				$("#overlay").hide();
 				$("#canvas").focus();
@@ -62,9 +62,9 @@ $(function(){
 		//$("#removeCitizen").click();
 	});
 	$("#removeCitizen").click(function(){
-		$.post("removeCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
+		$.post("aj_removeCitizen.aj.php", {id: $(".jobentry").eq($current).children("td").eq(0).html()}, function(data){
 			$("#cityValues").remove();
-			$.post("printCityValues.aj.php", function(data){
+			$.post("aj_printCityValues.aj.php", function(data){
 				$("#landscape").append(data);
 				$("#overlay").hide();
 				$("#canvas").focus();

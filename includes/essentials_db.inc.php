@@ -47,6 +47,7 @@ function db_hasErrors($r) {
 function db_selectUser($userid) {
 	global $user;
 	db_connect();
+	$userid = mysql_real_escape_string($userid);
 	$r = mysql_query("SELECT * FROM users WHERE ID='$userid'");
 	if (db_hasErrors($r) || mysql_num_rows($r) !== 1) {
 		db_disconnect();
@@ -68,6 +69,8 @@ function db_selectUser($userid) {
 function db_selectCitizenOfVenue($userId, $venueId) {
 	global $citizenOfVenue;
 	db_connect();
+	$userid = mysql_real_escape_string($userid);
+	$venueId = mysql_real_escape_string($venueId);
 	$r = mysql_query("SELECT * FROM citizen WHERE UserID='$userId' AND VenueID='$venueId'");
 	if (db_hasErrors($r)) {
 		db_disconnect();
@@ -89,6 +92,8 @@ function db_selectCitizenOfVenue($userId, $venueId) {
 */
 function db_citizenGroupJob($userId, $venueId) {
 	db_connect();
+	$userid = mysql_real_escape_string($userid);
+	$venueId = mysql_real_escape_string($venueId);
 	$r = mysql_query("
 		SELECT jobs.*, 
 			(SELECT COUNT(*) FROM citizen WHERE citizen.UserID='$userId' AND citizen.VenueID='$venueId' AND citizen.Job=jobs.ID) AS jobCount
@@ -108,6 +113,7 @@ function db_citizenGroupJob($userId, $venueId) {
 
 function db_citizenInVenue($venueId) {
 	db_connect();
+	$venueId = mysql_real_escape_string($venueId);
 	$r = mysql_query("
 		SELECT jobs.*, 
 			(SELECT COUNT(*) FROM citizen WHERE VenueID='$venueId' AND citizen.Job=jobs.ID) AS jobCount
@@ -127,6 +133,7 @@ function db_citizenInVenue($venueId) {
 
 function db_playersInVenue($venueId) {
 	db_connect();
+	$venueId = mysql_real_escape_string($venueId);
 	$r = mysql_query("SELECT COUNT(DISTINCT UserID) FROM citizen WHERE VenueID='$venueId'");
 	if (db_hasErrors($r)) {
 		db_disconnect();

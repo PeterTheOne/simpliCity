@@ -39,7 +39,12 @@ function fs_hasErrors($meta) {
 */
 function fs_getUserID() {
 	global $foursquare;
-	$request = $foursquare->GetPrivate("users/self");
+	$request = $foursquare->GetPrivate(
+					"users/self", 
+					array(
+						'v' => FOURSQUARE_API_VERSION
+					)
+	);
 	$details = json_decode($request, false);
 	if (fs_hasErrors($details->meta)) return false;
 	return $details->response->user->id;
@@ -73,7 +78,10 @@ function fs_getSelfCheckins($limit = 1) {
 	global $foursquare;
 	$request = $foursquare->GetPrivate(
 					"users/self/checkins", 
-					array('limit' => $limit)
+					array(
+						'limit' => $limit, 
+						'v' => FOURSQUARE_API_VERSION
+					)
 	);
 	$details = json_decode($request, false);
 	if (fs_hasErrors($details->meta)) return false;
@@ -82,7 +90,7 @@ function fs_getSelfCheckins($limit = 1) {
 
 /*
  *
- *	returns latest checkins
+ *	returns venues list by location
  *
 */
 function fs_getVenuesExplore($ll, $limit = 5) {
@@ -91,7 +99,8 @@ function fs_getVenuesExplore($ll, $limit = 5) {
 					"venues/explore", 
 					array(
 						'limit' => $limit, 
-						'll' => $ll
+						'll' => $ll, 
+						'v' => FOURSQUARE_API_VERSION
 					)
 	);
 	$details = json_decode($request, false);
@@ -115,13 +124,27 @@ function fs_checkin($venueid) {
 					"checkins/add", 
 					array(
 						'venueId' => $venueid, 
-						'shout' => 'checked in with simpliCity'
+						'shout' => 'checked in with simpliCity', 
+						'v' => FOURSQUARE_API_VERSION
 					),
 					true
 	);
 	$details = json_decode($request, false);
 	if (fs_hasErrors($details->meta)) return false;
 	return true;
+}
+
+function fs_getVenue($venueid) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"venues/$venueid",
+					array(
+						'v' => FOURSQUARE_API_VERSION
+					)
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return $details->response->venue;	
 }
 
 

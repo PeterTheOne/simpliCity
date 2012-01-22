@@ -120,7 +120,7 @@ function db_citizenGroupJob($userId, $venueId) {
 
 function db_citizenGroupJobByUser($userId) {
 	db_connect();
-	$userid = mysql_real_escape_string($userid);
+	$userId = mysql_real_escape_string($userId);
 	$r = mysql_query("
 		SELECT 
 			jobs.*, 

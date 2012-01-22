@@ -34,7 +34,7 @@ function displayMenu($latestCheckin) {
 	echo "<tr><td>id</td><td>job</td><td>desc</td><td>count</td><td>-</td><td>+</td></tr>";
 	foreach ($citizenGroupJob as $job) {
 		echo "<tr class=\"jobentry\">";
-		echo "<td>" . $job['Job'] . "</td>";
+		echo "<td>" . $job['ID'] . "</td>";
 		echo "<td>" . $job['Name'] . "</td>";
 		echo "<td>" . $job['Description'] . "</td>";
 		echo "<td>" . $job['jobCount'] . "</td>";

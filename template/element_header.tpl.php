@@ -3,7 +3,7 @@
 	<head>
 		<title>SimpliCity</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<meta name="Author" content="Andreas Kasch"/>
+		<meta name="Author" content="Andreas Kasch, Peter Grassberger"/>
 		<meta name="Description" content="SimpliCity"/>
 		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/system/logo.ico" />

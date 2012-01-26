@@ -147,5 +147,18 @@ function fs_getVenue($venueid) {
 	return $details->response->venue;	
 }
 
+function fs_getVenueLocation($venueid) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"venues/$venueid",
+					array(
+						'v' => FOURSQUARE_API_VERSION
+					)
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return $details->response->venue->location;	
+}
+
 
 ?>

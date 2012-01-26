@@ -342,5 +342,30 @@ function db_citiesByUser($userId, $limit = 10) {
 	return $array;
 }
 
+function db_citizenCountPerVenue() {
+	db_connect();
+	$r = mysql_query("
+		SELECT
+			citizen.VenueID, 
+			COUNT(Job) AS countJob
+		FROM 
+			citizen
+		GROUP BY 
+			VenueID
+		ORDER BY
+			countJob DESC
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$array = array();
+	while ($line = mysql_fetch_array($r)) {
+		$array[] = $line;
+	}
+	db_disconnect();
+	return $array;
+}
+
 
 ?>

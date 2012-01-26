@@ -35,27 +35,10 @@
 	</head>
 	<body>
 		<h1>SimpliCity - map test</h1>
-		<div id="map" style="width:800px; height:600px;"></div>
-		<div id="data" style="/*display:none;*/">
-			<ul>
-<?php
-	$venueList = db_citizenCountPerVenue();
-	foreach ($venueList as $db_venue) {
-		$fs_venue = fs_getVenue($db_venue['VenueID']);
-?>
-				<li>
-					<span class="name"><?php echo $fs_venue->name ?></span>
-					<span class="id"><?php echo $db_venue['VenueID'] ?></span>
-					<span class="cit"><?php echo $db_venue['countJob'] ?></span>
-					<span class="lat"><?php echo $fs_venue->location->lat ?></span>
-					<span class="lng"><?php echo $fs_venue->location->lng ?></span>
-				</li>
-<?php
-	}
-?>
-
-			</ul>
-		</div>
+		<div id="map" style="width:100%; height:600px;"></div>
+		<p>
+			<a href="admin_map_venuelist.php">see list</a>
+		</p>
 		<script defer="defer" type="text/javascript">
 			$(function(){
 				// create map
@@ -74,26 +57,12 @@
 				var zoom = 2;
 				map.setCenter(startPosition, zoom);
 				
-				// add markers layer
-				var markers = new OpenLayers.Layer.Markers( "Markers" );
-				map.addLayer(markers);
-				
-				// setup marker icons
-				var size = new OpenLayers.Size(21,25);
-				var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-				var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
-				
-				// parse list of venues
-				$("#data ul li").each(function(){
-					var lat = $(this).children(".lat").html();
-					var lng = $(this).children(".lng").html();
-					var lonLat = new OpenLayers.LonLat(lng, lat)
-					.transform(
-						new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-						map.getProjectionObject() // to Spherical Mercator Projection
-					);
-					markers.addMarker(new OpenLayers.Marker(lonLat, icon.clone()));
-				});
+				// add points of interest layer from file
+				var pois = new OpenLayers.Layer.Text( "My Points",
+                    { location:"./admin_map_venuelist.php",
+                      projection: map.displayProjection
+                    });
+				map.addLayer(pois);
 				
 			});
 		</script>

@@ -21,7 +21,7 @@
 				<script type="text/javascript" src="script/functions_city_overlay.js"></script>
 			
 				<div id="lowerLeft">
-					<div class="button" id="addBtn"><img src="images/interface/addCitizenIcon.png" alt="add citizen"/></div>
+					<div class="button" id="addBtn"><img src="images/interface/addCitizen.png" alt="add citizen"/></div>
 				</div>
 				<p id="citizenCount">
 					

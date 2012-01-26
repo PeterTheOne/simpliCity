@@ -9,7 +9,8 @@ $r = mysql_query(
 		ID BIGINT NOT NULL PRIMARY KEY,
 		Token VARCHAR(128) NOT NULL,
 		LoginDate DATE NOT NULL,
-		UnusedCitizen INT NOT NULL
+		UnusedCitizen INT NOT NULL,
+		Points INT NOT NULL DEFAULT '0'
 	)ENGINE=InnoDB;");
 db_hasErrors($r);
 

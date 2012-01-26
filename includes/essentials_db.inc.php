@@ -39,11 +39,11 @@ function db_hasErrors($r) {
  *	don't forget to use db_selectUser after db changes!!!
  *
 */
-function db_selectUser($userid) {
+function db_selectUser($userId) {
 	global $user;
 	db_connect();
-	$userid = mysql_real_escape_string($userid);
-	$r = mysql_query("SELECT * FROM users WHERE ID='$userid'");
+	$userId = mysql_real_escape_string($userId);
+	$r = mysql_query("SELECT * FROM users WHERE ID='$userId'");
 	if (db_hasErrors($r) || mysql_num_rows($r) !== 1) {
 		db_disconnect();
 		return false;
@@ -64,7 +64,7 @@ function db_selectUser($userid) {
 function db_selectCitizenOfVenue($userId, $venueId) {
 	global $citizenOfVenue;
 	db_connect();
-	$userid = mysql_real_escape_string($userid);
+	$userId = mysql_real_escape_string($userId);
 	$venueId = mysql_real_escape_string($venueId);
 	$r = mysql_query("SELECT * FROM citizen WHERE UserID='$userId' AND VenueID='$venueId'");
 	if (db_hasErrors($r)) {
@@ -86,7 +86,7 @@ function db_selectCitizenOfVenue($userId, $venueId) {
 */
 function db_citizenGroupJob($userId, $venueId) {
 	db_connect();
-	$userid = mysql_real_escape_string($userid);
+	$userId = mysql_real_escape_string($userId);
 	$venueId = mysql_real_escape_string($venueId);
 	$r = mysql_query("
 		SELECT 

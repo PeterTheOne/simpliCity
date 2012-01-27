@@ -26,7 +26,9 @@ if(array_key_exists("code", $_GET)){
 }
 
 	if (!isset($token)) { 
-		echo "<p id=\"authlink\"><a href='" . $foursquare->AuthenticationLink(REDIRECT_URI) . "'>Connect to this app via Foursquare</a></p>";
+		echo "<p id=\"authlink\"><a href='" . 
+			$foursquare->AuthenticationLink(REDIRECT_URI) . 
+			"'><img src=\"foursquare.png\" alt=\"Connect to this app via Foursquare\" /></a></p>";
 	} else {
 		//echo "<p id=\"token\">$token</p>";
 		header('Location: http://' . $_SESSION['host'] . "?token=$token");

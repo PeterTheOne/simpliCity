@@ -56,7 +56,7 @@
 ?>
 </ul>
 <p>
-	Die 10 Städte in denen du mehr Bürger als andere Spieler dort haben: 
+	10 Städte in denen du die meisten Bürger hast
 </p>
 <ul>
 <?php

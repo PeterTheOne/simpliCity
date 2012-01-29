@@ -285,6 +285,7 @@ function db_countMostCitizenCities($userId) {
 	db_disconnect();
 }
 
+// TODO: fix this function.. doesnt work right.
 function db_mostCitizenCities($userId, $limit = 10) {
 	db_connect();
 	$userId = mysql_real_escape_string($userId);
@@ -382,6 +383,34 @@ function db_citizenCountPerVenue() {
 			VenueID
 		ORDER BY
 			countJob DESC
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$array = array();
+	while ($line = mysql_fetch_array($r)) {
+		$array[] = $line;
+	}
+	db_disconnect();
+	return $array;
+}
+
+function db_userAndCitizenCount($venueId) {
+	db_connect();
+	$venueId = mysql_real_escape_string($venueId);
+	$r = mysql_query("
+		SELECT 
+			*, 
+			COUNT(*) AS citizenCount 
+		FROM 
+			citizen 
+		WHERE 
+			VenueID = '$venueId' 
+		GROUP BY 
+			UserID
+		ORDER BY
+			citizenCount DESC
 	");
 	if (db_hasErrors($r)) {
 		db_disconnect();

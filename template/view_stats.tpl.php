@@ -1,6 +1,6 @@
 <h2>Aufschlüsselung der verteilten Bürger</h1>
 <p>
-	So viel Bürger hast du insgesamt verteilt.
+	Bürger
 </p>
 <?php
 	$citizenGroupJob = db_citizenGroupJobByUser($_SESSION['userid']);
@@ -8,9 +8,8 @@
 ?>
 <table border=\"1\">
 	<tr>
-		<td>job</td>
-		<td>desc</td>
-		<td>count</td>
+		<td>Beruf</td>
+		<td>Anzahl</td>
 	</tr>
 <?php
 	$totalCount = 0;
@@ -19,31 +18,28 @@
 ?>
 	<tr>
 		<td><?php echo $job['Name'] ?></td>
-		<td><?php echo $job['Description'] ?></td>
 		<td><?php echo $job['jobCount'] ?></td>
 	</tr>
 <?php
 	}
 ?>
 <tr>
-	<td>Total</td>
-	<td>Anzahl verteilter Bürger</td>
+	<td>Verteilt</td>
 	<td><?php echo $totalCount ?></td>
 </tr>
 <tr>
 	<td>Übrig</td>
-	<td>Anzahl nicht verteilter Bürger</td>
 	<td><?php echo $user->unusedCitizen; ?></td>
 </tr>
 </table>
 
-<h2>Anzahl besuchter Städte</h2>
+<h2>Städte</h2>
 <p>
 	Du hast Bürger in <?php echo db_countPlayerCities($user->id); ?> Städten, 
-	in <?php echo db_countMostCitizenCities($user->id); ?> Städten hast du mehr Bürger als andere Spieler.
+	in <?php echo db_countMostCitizenCities($user->id); ?> Städten hast du mehr Bürger als alle anderen Spieler.
 </p>
 <p>
-	Deine 10 erfolgreichsten städte sind: 
+	Deine 10 erfolgreichsten Städte sind: 
 </p>
 <ul>
 <?php
@@ -56,7 +52,7 @@
 ?>
 </ul>
 <p>
-	Die 10 Städte in denen du mehr Bürger als andere Spieler dort haben: 
+	Die Städte in denen du mehr Bürger als alle anderen Spieler hast: 
 </p>
 <ul>
 <?php

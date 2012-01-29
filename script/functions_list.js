@@ -12,6 +12,7 @@ function saveCoords(position)
 {
 	$.post("aj_list_getlist.aj.php", {lat: position.coords.latitude, lon: position.coords.longitude}, function(data){
 		$("#venuelist").html(data);
+		//$("#venuelist").hide();
 	});
 }
 

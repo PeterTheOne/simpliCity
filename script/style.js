@@ -60,10 +60,10 @@ function update(){
 	var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
 	$("#canvas").attr("width", width);
 	$("#canvas").attr("height", height);
-	$("#overlay").css("width", width - 100);
-	$("#overlay").css("height", height - 150);
-	$("#overlay").css("top", 75);
-	$("#overlay").css("left", 50);
+	$("#overlay").css("width", width - 60);
+	$("#overlay").css("height", height - 120);
+	$("#overlay").css("top", 60);
+	$("#overlay").css("left", 30);
 	//$("#overlay").show();
 	
 	/*var difference = Math.abs(width-height);

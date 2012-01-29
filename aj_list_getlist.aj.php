@@ -18,12 +18,10 @@ db_selectUser($_SESSION['userid']);
 
 if(isset($_POST["lat"]) && isset($_POST["lon"])){
 	$items = fs_getVenuesExplore($_POST["lat"].", ".$_POST["lon"], 10);
-
+	echo "<h3>Checkin:</h3>";
 	foreach ($items as $item) {?>
-		<ul>
-			<li><?php echo $item->venue->name; ?> - <a href="index.php?view=checkin&checkinid=<?php echo $item->venue->id ?>">checkin</a></li>
-		</ul>
-	<?php } 
+			<p class="widebutton"><a class="venue" href="index.php?view=checkin&checkinid=<?php echo $item->venue->id ?>"><?php echo $item->venue->name; ?></a></p>
+	<?php }
 } else {
 	echo "<p>No geolocation data available, please check-in manually at foursquare!</p>";
 }

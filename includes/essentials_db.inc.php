@@ -241,38 +241,33 @@ function db_countMostCitizenCities($userId) {
 	db_connect();
 	$userId = mysql_real_escape_string($userId);
 		$r = mysql_query("
-		SELECT
-			COUNT(DISTINCT userVenues.VenueID) AS cityCount
+		SELECT 
+			COUNT(*) AS cityCount
 		FROM 
 			(
-				SELECT
-					citizen.UserID, 
-					citizen.VenueID, 
-					COUNT(Job) AS countJob
+				SELECT 
+					* 
 				FROM 
-					citizen
-				WHERE
-					UserID = '$userId'
-				GROUP BY 
-					VenueID
-			) AS userVenues, 
-			(
-				SELECT
-					citizen.UserID, 
-					citizen.VenueID, 
-					COUNT(Job) AS countJob
-				FROM 
-					citizen
-				WHERE
-					UserID <> '$userId'
-				GROUP BY 
-					UserID, 
-					VenueID
-			) AS nonUserVenues
+					(
+						SELECT 
+							UserID, 
+							VenueID, 
+							COUNT(*) AS countJob 
+						FROM 
+							citizen 
+						GROUP BY 
+							UserID, 
+							VenueID 
+						ORDER BY 
+							VenueID, 
+							countJob DESC 
+					) AS subSubTable
+				GROUP BY VenueID
+			) AS subTable 
 		WHERE 
-			userVenues.VenueID = nonUserVenues.VenueID
-		AND 
-			userVenues.countJob > nonUserVenues.countJob
+			UserID = '$userId'
+		ORDER BY 
+			countJob DESC
 	");
 	if (db_hasErrors($r)) {
 		db_disconnect();
@@ -289,41 +284,33 @@ function db_mostCitizenCities($userId, $limit = 10) {
 	db_connect();
 	$userId = mysql_real_escape_string($userId);
 	$r = mysql_query("
-		SELECT
-			userVenues.VenueID, 
-			userVenues.countJob
+		SELECT 
+			* 
 		FROM 
 			(
-				SELECT
-					citizen.UserID, 
-					citizen.VenueID, 
-					COUNT(Job) AS countJob
+				SELECT 
+					* 
 				FROM 
-					citizen
-				WHERE
-					UserID = '$userId'
-				GROUP BY 
-					VenueID
-			) AS userVenues, 
-			(
-				SELECT
-					citizen.UserID, 
-					citizen.VenueID, 
-					COUNT(Job) AS countJob
-				FROM 
-					citizen
-				WHERE
-					UserID <> '$userId'
-				GROUP BY 
-					UserID, 
-					VenueID
-			) AS nonUserVenues
+					(
+						SELECT 
+							UserID, 
+							VenueID, 
+							COUNT(*) AS countJob 
+						FROM 
+							citizen 
+						GROUP BY 
+							UserID, 
+							VenueID 
+						ORDER BY 
+							VenueID, 
+							countJob DESC 
+					) AS subSubTable
+				GROUP BY VenueID
+			) AS subTable 
 		WHERE 
-			userVenues.VenueID = nonUserVenues.VenueID
-		AND 
-			userVenues.countJob > nonUserVenues.countJob
-		ORDER BY
-			countJob DESC
+			UserID = '$userId'
+		ORDER BY 
+			countJob DESC 
 		LIMIT 
 			$limit
 	");
@@ -382,6 +369,34 @@ function db_citizenCountPerVenue() {
 			VenueID
 		ORDER BY
 			countJob DESC
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$array = array();
+	while ($line = mysql_fetch_array($r)) {
+		$array[] = $line;
+	}
+	db_disconnect();
+	return $array;
+}
+
+function db_userAndCitizenCount($venueId) {
+	db_connect();
+	$venueId = mysql_real_escape_string($venueId);
+	$r = mysql_query("
+		SELECT 
+			*, 
+			COUNT(*) AS citizenCount 
+		FROM 
+			citizen 
+		WHERE 
+			VenueID = '$venueId' 
+		GROUP BY 
+			UserID
+		ORDER BY
+			citizenCount DESC
 	");
 	if (db_hasErrors($r)) {
 		db_disconnect();

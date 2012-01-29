@@ -52,7 +52,7 @@
 ?>
 </ul>
 <p>
-	Die Städte in denen du mehr Bürger als alle anderen Spieler hast: 
+	Die Städte in denen du mehr Bürger als alle anderen Spieler hast:
 </p>
 <ul>
 <?php

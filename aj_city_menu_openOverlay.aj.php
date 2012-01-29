@@ -52,6 +52,7 @@ function displayMenu($latestCheckin) {
 			//echo "<td>-</td>";
 			echo "<td>0</td>";
 		}
+		echo "<td>" . $job['totalJobCount'] . "</td>";
 		echo "</tr>";
 	}
 	echo "</table>";

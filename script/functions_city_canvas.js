@@ -97,7 +97,11 @@ window.onload = function(){
 
 function updateCity(){
 	seed = document.getElementById("venueID").innerHTML;
-	document.getElementById("cityname").innerHTML = document.getElementById("venueName").innerHTML;
+	document.getElementById("cityname").innerHTML = document.getElementById("venueName").innerHTML + "<br/>" + document.getElementById("citizens").innerHTML + " Einwohner";
+	document.getElementById("citizenCount").innerHTML = document.getElementById("remaining").innerHTML;
+	var cityname = $("#cityname");
+	$("#cityname").remove();
+	$("#upperLeft").append(cityname);
 	innerCity = document.getElementById("innerCity").innerHTML;
 	industry = document.getElementById("industry").innerHTML;
 	urban = document.getElementById("urban").innerHTML;
@@ -138,10 +142,10 @@ function draw(cFrame){
 		var cy = 0;
 		var sx = 0;
 		var sy = 0;
-		var rndInnerCity = new RandomNumbers(getSeed(seed));
+		/*var rndInnerCity = new RandomNumbers(getSeed(seed));
 		var rndIndustry = new RandomNumbers(getSeed(seed));
 		var rndUrban = new RandomNumbers(getSeed(seed));
-		var rndRural = new RandomNumbers(getSeed(seed));
+		var rndRural = new RandomNumbers(getSeed(seed));*/
 		
 		for(var i = 0; i <= canvas.width/grass.width+2; i++){
 			for(var j = 0; j <= canvas.height/grass.height+2; j++){
@@ -153,7 +157,7 @@ function draw(cFrame){
 			for(var j = 0; j < city[i].length; j++){
 				//if(city[i][j] != 0 && city[i][j] != null) context.drawImage(img[city[i][j]], 40*((cFrame+Math.pow(i, j))%framecount), 0, 40, img[city[i][j]].height, cx+offx, cy+offy-img[city[i][j]].height, img[city[i][j]].width/framecount, img[city[i][j]].height);
 				var currentimg = null;
-				if(city[i][j] == 4){
+				/*if(city[i][j] == 4){
 					currentimg = imgInnerCity[rndInnerCity.intRand(0,imgInnerCity.length-1)];
 				} else if(city[i][j] == 3){
 					currentimg = imgIndustry[rndIndustry.intRand(0,imgIndustry.length-1)];
@@ -161,6 +165,19 @@ function draw(cFrame){
 					currentimg = imgUrban[rndUrban.intRand(0,imgUrban.length-1)];
 				} else if(city[i][j] == 1){
 					currentimg = imgRural[rndRural.intRand(0,imgRural.length-1)];
+				}*/
+				if(city[i][j] != 0){
+					var citystr = city[i][j];
+					var citysplit = citystr.split(",");
+					if(citysplit[0] == 4){
+						currentimg = imgInnerCity[citysplit[1]];
+					} else if(citysplit[0] == 3){
+						currentimg = imgIndustry[citysplit[1]];
+					} else if(citysplit[0] == 2){
+						currentimg = imgUrban[citysplit[1]];
+					} else if(citysplit[0] == 1){
+						currentimg = imgRural[citysplit[1]];
+					}
 				}
 				if(currentimg != null){
 					context.drawImage(currentimg, cx+offx, cy+offy-currentimg.height, currentimg.width, currentimg.height);

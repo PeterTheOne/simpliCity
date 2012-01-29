@@ -134,6 +134,12 @@ function buildCity(innerCity, industry, urban, rural, seedcode, lowCitySize){
 	var indusRnd = new RandomNumbers(rnd.intRand(0,99));
 	var urbanRnd = new RandomNumbers(rnd.intRand(0,99));
 	var ruralRnd = new RandomNumbers(rnd.intRand(0,99));
+	//
+	var rndInnerCity = new RandomNumbers(rnd.intRand(0,99));
+	var rndIndustry = new RandomNumbers(rnd.intRand(0,99));
+	var rndUrban = new RandomNumbers(rnd.intRand(0,99));
+	var rndRural = new RandomNumbers(rnd.intRand(0,99));
+	//
 	var city = new City();
 	var indusXs = rnd.intRand(-6,6);
 	var indusYs = rnd.intRand(-6,6);
@@ -162,7 +168,7 @@ function buildCity(innerCity, industry, urban, rural, seedcode, lowCitySize){
 				} else {
 					cityY += innerRnd.intRand(-1,1);
 				}
-			}while(!city.addBuilding(4, cityX, cityY));
+			}while(!city.addBuilding("4,"+rndInnerCity.intRand(0,imgInnerCity.length-1), cityX, cityY));
 		}
 		if(i < industry){
 			do{
@@ -184,7 +190,7 @@ function buildCity(innerCity, industry, urban, rural, seedcode, lowCitySize){
 				} else {
 					indusY += indusRnd.intRand(-1,1);
 				}
-			}while(!city.addBuilding(3, indusX, indusY));
+			}while(!city.addBuilding("3,"+rndIndustry.intRand(0,imgIndustry.length-1), indusX, indusY));
 		}
 	}
 	cityX = 0;
@@ -209,7 +215,7 @@ function buildCity(innerCity, industry, urban, rural, seedcode, lowCitySize){
 			} else {
 				cityY += urbanRnd.intRand(-2,2);
 			}
-		}while(!city.addBuilding(2, cityX, cityY));
+		}while(!city.addBuilding("2,"+rndUrban.intRand(0,imgUrban.length-1), cityX, cityY));
 		
 	}
 	cityX = 0;
@@ -234,7 +240,7 @@ function buildCity(innerCity, industry, urban, rural, seedcode, lowCitySize){
 			} else {
 				cityY += ruralRnd.intRand(-8,8);
 			}
-		}while(!city.addBuilding(1, cityX, cityY));
+		}while(!city.addBuilding("1,"+rndRural.intRand(0,imgRural.length-1), cityX, cityY));
 		
 	}
 	city.calcLower(myseed, lowCitySize);

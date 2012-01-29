@@ -22,10 +22,10 @@
 			
 				<div id="lowerLeft">
 					<div class="button" id="addBtn"><img src="images/interface/addCitizen.png" alt="add citizen"/></div>
+					<p id="citizenCount">
+						&nbsp;
+					</p>
 				</div>
-				<p id="citizenCount">
-					
-				</p>
 			</div>			
 			<div id="overlay">
 				<div id="citizenTable">

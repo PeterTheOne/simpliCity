@@ -102,7 +102,17 @@ function db_citizenGroupJob($userId, $venueId) {
 					citizen.VenueID='$venueId' 
 				AND 
 					citizen.Job=jobs.ID
-			) AS jobCount
+			) AS jobCount,
+			(
+				SELECT 
+					COUNT(*) 
+				FROM 
+					citizen 
+				WHERE
+					citizen.VenueID='$venueId' 
+				AND 
+					citizen.Job=jobs.ID
+			) AS totalJobCount
 		FROM 
 			jobs
 	");
@@ -167,6 +177,24 @@ function db_citizenInVenue($venueId) {
 	}
 	db_disconnect();
 	return $citizenGroupJob;
+}
+
+function db_remainingCitizen($userId) {
+	db_connect();
+	$userId = mysql_real_escape_string($userId);
+	$r = mysql_query("
+		SELECT UnusedCitizen FROM users WHERE ID='$userId'
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$count = 0;
+	while ($line = mysql_fetch_array($r)) {
+		$count = $line["UnusedCitizen"];
+	}
+	db_disconnect();
+	return $count;
 }
 
 function db_playersInVenue($venueId) {

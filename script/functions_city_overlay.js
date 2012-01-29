@@ -34,7 +34,10 @@ $(function(){
 			$("#cityValues").remove();
 			$.post("aj_city_overlay_printCityValues.aj.php", function(data){
 				$("#landscape").append(data);
-				$("#overlay").hide();
+				$.post("aj_city_menu_openOverlay.aj.php", function(data){
+					$("#citizenTable").html(data);
+					updateCitizenMenu();
+				});
 				$("#canvas").focus();
 			});
 			
@@ -48,7 +51,10 @@ $(function(){
 			$("#cityValues").remove();
 			$.post("aj_city_overlay_printCityValues.aj.php", function(data){
 				$("#landscape").append(data);
-				$("#overlay").hide();
+				$.post("aj_city_menu_openOverlay.aj.php", function(data){
+					$("#citizenTable").html(data);
+					updateCitizenMenu();
+				});
 				$("#canvas").focus();
 			});
 		});
@@ -61,7 +67,7 @@ $(function(){
 });
 
 function updateCitizenMenu(){
-	$("#currentTitle").html($(".jobentry").eq($current).children("td").eq(1).html()+" ("+$(".jobentry").eq($current).children("td").eq(3).html()+")");
+	$("#currentTitle").html($(".jobentry").eq($current).children("td").eq(1).html()+" ( "+$(".jobentry").eq($current).children("td").eq(3).html()+" : "+$(".jobentry").eq($current).children("td").eq(6).html()+" )");
 	$("#citizenDescription").html($(".jobentry").eq($current).children("td").eq(2).html());
 	
 	if($(".jobentry").eq($current).children("td").eq(4).html() == 0){

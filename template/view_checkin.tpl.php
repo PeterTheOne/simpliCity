@@ -4,6 +4,11 @@ require_once("includes/essentials.inc.php");
 require_once("includes/essentials_fs.inc.php");
 
 $result = fs_checkin(sanitize($_GET['checkinid']));
+
+if($result){
+	header("Location: ?view=city");
+}
+
 ?>
 
 <div>

@@ -6,6 +6,10 @@ $(function(){
 		// GeoLocation nicht verfügbar
 		$("#venuelist").html("<p>Sorry, your browser doesn't support GeoLocation, please check-in manually at Foursquare!</p>");
 	}
+	
+	$(".widebutton").live("click",function(){
+		window.location = $(this).children("a").attr("href");
+	});
 });
 
 function saveCoords(position)

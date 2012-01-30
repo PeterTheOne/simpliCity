@@ -96,7 +96,7 @@ function fs_getSelfCheckins($limit = 1) {
 function fs_getVenuesExplore($ll, $limit = 5) {
 	global $foursquare;
 	$request = $foursquare->GetPrivate(
-					"venues/explore", 			//besser mit /search ?
+					"venues/explore", 
 					array(
 						'limit' => $limit, 
 						'll' => $ll, 
@@ -111,6 +111,26 @@ function fs_getVenuesExplore($ll, $limit = 5) {
 		}
 	}
 	return false;
+}
+
+/*
+ *
+ *	returns venues list by location
+ *
+*/
+function fs_getVenuesSearch($ll, $limit = 5) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"venues/search", 
+					array(
+						'limit' => $limit, 
+						'll' => $ll, 
+						'v' => FOURSQUARE_API_VERSION
+					)
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return $details->response->venues;
 }
 
 /*

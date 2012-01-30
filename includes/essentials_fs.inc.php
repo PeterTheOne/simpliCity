@@ -96,7 +96,7 @@ function fs_getSelfCheckins($limit = 1) {
 function fs_getVenuesExplore($ll, $limit = 5) {
 	global $foursquare;
 	$request = $foursquare->GetPrivate(
-					"venues/explore", 
+					"venues/explore", 			//besser mit /search ?
 					array(
 						'limit' => $limit, 
 						'll' => $ll, 

@@ -11,10 +11,6 @@
 	
 	require_once("includes/functions_index.inc.php");
 	
-	fs_setup($_SESSION["authtoken"]);
-	if(!isset($_SESSION['userid'])) {
-		$_SESSION['userid'] = fs_getUserID();	
-	}
 	checkAuthentication();
 	
 	if (!isset($_GET['pwd']) || sanitize($_GET['pwd']) !== ADMIN_PWD) {

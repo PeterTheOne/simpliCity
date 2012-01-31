@@ -211,10 +211,10 @@ html, body{
 
 
 #currentTitle{
-	height: 45px;
+	height: 50px;
 	width: 100%;
 	text-align: center;
-	padding-top: 15px;
+	padding-top: 10px;
 }
 
 #citizenDescription{

@@ -56,20 +56,20 @@ $(function(){
 		});
 	});
 	
-	$(".scrolling, .scrolling *").addEventListener("touchstart",function(event){
+	$(".scrolling, .scrolling *").bind("touchstart",function(event){
 		sy = event.touches[0].pageY;
 		cy = $(".scrolling").scrollTop();
 		scroll = true;
-	}, false);
+	});
 	
-	$(".scrolling, .scrolling *").addEventListener("touchmove",function(event){
+	$(".scrolling, .scrolling *").bind("touchmove",function(event){
 		if(scroll){
 			var dy = sy-event.touches[0].pageY;
 			$(".scrolling").scrollTop(cy + dy);
 		}
 	});
 
-	$("*").addEventListener("touchend",function(event){
+	$("*").bind("touchend",function(event){
 		scroll = false;
 	});
 	

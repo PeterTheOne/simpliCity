@@ -67,7 +67,7 @@ $(function(){
 });
 
 function updateCitizenMenu(){
-	$("#currentTitle").html($(".jobentry").eq($current).children("td").eq(1).html()+" ( "+$(".jobentry").eq($current).children("td").eq(3).html()+" : "+$(".jobentry").eq($current).children("td").eq(6).html()+" )");
+	$("#currentTitle").html($(".jobentry").eq($current).children("td").eq(1).html()+"<br/>( "+$(".jobentry").eq($current).children("td").eq(3).html()+" : "+$(".jobentry").eq($current).children("td").eq(6).html()+" )");
 	$("#citizenDescription").html($(".jobentry").eq($current).children("td").eq(2).html());
 	
 	if($(".jobentry").eq($current).children("td").eq(4).html() == 0){

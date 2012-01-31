@@ -38,7 +38,7 @@ if(array_key_exists("code", $_GET)){
 		<meta name="viewport" content="width=device-width, initial-scale = 1.0, user-scalable = no" />
 		<script type="text/javascript" src="jquery.js"></script>
 		<style type="text/css">
-			body{
+			body {
 				background-color: #03638c;
 				font-family: Nyala,Verdana,Arial,sans-serif;
 				font-size: 12pt;
@@ -47,8 +47,10 @@ if(array_key_exists("code", $_GET)){
 				color: rgb(192,192,192);
 			}
 			
-			img, #authlink{
+			img {
+				display: block;
 				margin: 0 auto;
+				width: 176px;
 			}
 		</style>
 	</head>

@@ -11,10 +11,6 @@
 	
 	require_once("includes/functions_index.inc.php");
 	
-	fs_setup($_SESSION["authtoken"]);
-	if(!isset($_SESSION['userid'])) {
-		$_SESSION['userid'] = fs_getUserID();	
-	}
 	checkAuthentication();
 
 echo "lat\tlon\ttitle\tdescription\ticon\ticonSize\ticonOffset\n";

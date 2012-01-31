@@ -138,10 +138,11 @@ function draw(cFrame){
 		context.rect(0, 0, canvas.width, canvas.height);
 		context.fillStyle = "#00FF00";
 		context.fill();
-		var cx = 0;
-		var cy = 0;
-		var sx = 0;
-		var sy = 0;
+		var cx = -(-(dx*(city.length/2))+(dx*(city[0].length/2)));
+		var cy = -((dy*(city.length/2))+(dy*(city[0].length/2)));
+		//alert(cx + "," + cy);
+		var sx = cx;
+		var sy = cy;
 		/*var rndInnerCity = new RandomNumbers(getSeed(seed));
 		var rndIndustry = new RandomNumbers(getSeed(seed));
 		var rndUrban = new RandomNumbers(getSeed(seed));

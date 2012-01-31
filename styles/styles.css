@@ -36,7 +36,7 @@ html, body{
 }
 
 .widebutton{
-	height: 25px;
+	height: 33px;
 	width: 94%;
 	background-color: #333399;
 	margin: 0px;
@@ -241,8 +241,8 @@ html, body{
 
 #venuelist p{
 	padding: 0px;
-	padding-top: 10px;
-	font-size: 20px;
+	padding-top: 2px;
+	font-size: 14px;
 }
 
 #venuelist p a{
@@ -254,4 +254,16 @@ html, body{
 	text-align: right;
 	margin-right: 10px;
 	color: #EEEEEE;
+}
+
+#statistics{
+	text-align: left;
+	overflow: auto;
+	height: 100%;
+	color: #EEEEEE;
+	padding-left: 10px;
+}
+
+#statistics h3:first-child{
+	margin-top: 55px;
 }

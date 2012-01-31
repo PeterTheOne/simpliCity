@@ -1,4 +1,8 @@
 var hide = true;
+var sy = 0;
+var scroll = false;
+var cy = 0;
+
 
 $(function(){
 	update();
@@ -52,6 +56,40 @@ $(function(){
 		});
 	});
 	
+	$(".scrolling, .scrolling *").addEventListener("touchstart",function(event){
+		sy = event.touches[0].pageY;
+		cy = $(".scrolling").scrollTop();
+		scroll = true;
+	}, false);
+	
+	$(".scrolling, .scrolling *").addEventListener("touchmove",function(event){
+		if(scroll){
+			var dy = sy-event.touches[0].pageY;
+			$(".scrolling").scrollTop(cy + dy);
+		}
+	});
+
+	$("*").addEventListener("touchend",function(event){
+		scroll = false;
+	});
+	
+	$(".scrolling, .scrolling *").bind("mousedown",function(event){
+		sy = event.pageY;
+		cy = $(".scrolling").scrollTop();
+		scroll = true;
+	});
+	
+	$(".scrolling, .scrolling *").bind("mousemove",function(event){
+		if(scroll){
+			var dy = sy-event.pageY;
+			$(".scrolling").scrollTop(cy + dy);
+		}
+	});
+	
+	$("*").bind("mouseup",function(event){
+		scroll = false;
+	});
+	
 });
 
 
@@ -64,6 +102,8 @@ function update(){
 	$("#overlay").css("height", height - 120);
 	$("#overlay").css("top", 60);
 	$("#overlay").css("left", 30);
+	
+	$("#statistics").css("height", height);
 	//$("#overlay").show();
 	
 	/*var difference = Math.abs(width-height);
@@ -91,3 +131,5 @@ function update(){
 		window.scrollTo(0, 1);
 	}
 }
+
+

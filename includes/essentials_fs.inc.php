@@ -96,7 +96,7 @@ function fs_getSelfCheckins($limit = 1) {
 function fs_getVenuesExplore($ll, $limit = 5) {
 	global $foursquare;
 	$request = $foursquare->GetPrivate(
-					"venues/explore", 			//besser mit /search ?
+					"venues/search", 			//besser mit /search ?
 					array(
 						'limit' => $limit, 
 						'll' => $ll, 
@@ -105,11 +105,16 @@ function fs_getVenuesExplore($ll, $limit = 5) {
 	);
 	$details = json_decode($request, false);
 	if (fs_hasErrors($details->meta)) return false;
-	foreach ($details->response->groups as $group) {
+	
+	//code für venues/search
+	return $details->response->venues;
+	
+	//alter code für venues/explore
+	/*foreach ($details->response->groups as $group) {
 		if ($group->type == "recommended") {
 			return $group->items;
 		}
-	}
+	}*/
 	return false;
 }
 

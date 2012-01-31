@@ -44,6 +44,7 @@ if(array_key_exists("code", $_GET)){
 				font-size: 12pt;
 				width: 100%;
 				height: 100%;
+				color: rgb(192,192,192);
 			}
 			
 			img, #authlink{

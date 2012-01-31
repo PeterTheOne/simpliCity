@@ -1,6 +1,7 @@
 <?php
 
 require_once("includes/config.inc.php");
+require_once("includes/lib/FoursquareAPI.class.php");
 
 /*
  *
@@ -180,5 +181,17 @@ function fs_getVenueLocation($venueid) {
 	return $details->response->venue->location;	
 }
 
+function fs_getUser($userId) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"users/$userId",
+					array(
+						'v' => FOURSQUARE_API_VERSION
+					)
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return $details->response->user;
+}
 
 ?>

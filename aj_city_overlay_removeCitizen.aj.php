@@ -45,7 +45,29 @@ function removeCitizen($venueId, $checkinTime, $job) {
 	$removeId = $line['ID'];
 	$r2 = mysql_query("DELETE FROM citizen WHERE ID='$removeId'");
 	$r3 = mysql_query("UPDATE users SET UnusedCitizen=UnusedCitizen+1 WHERE ID='$user->id'");
-	if (db_hasErrors($r1) || mysql_num_rows($r1) !== 1 || db_hasErrors($r2) || db_hasErrors($r3)) {
+	$r4 = mysql_query("
+		UPDATE 
+			users 
+		SET 
+			Points = Points - 
+				(
+					SELECT
+						COUNT(*)
+					FROM
+						citizen
+					WHERE
+						VenueID = '$venueId'
+					AND 
+						citizen.UserID = users.ID
+				)
+		WHERE 
+			ID != '$user->id'
+	");
+	if (db_hasErrors($r1) || 
+			mysql_num_rows($r1) !== 1 || 
+			db_hasErrors($r2) || 
+			db_hasErrors($r3) || 
+			db_hasErrors($r4)) {
 		mysql_query("ROLLBACK");
 		db_disconnect();
 		return false;

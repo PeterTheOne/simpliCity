@@ -1,9 +1,10 @@
 <div id="statistics" class="scrolling">
-	<h3>Bürger</h3>
 	<?php
 		$citizenGroupJob = db_citizenGroupJobByUser($_SESSION['userid']);
 		db_selectUser($_SESSION['userid']);
 	?>
+	<h3>Punkte: <?php echo $user->points; ?></h3>
+	<h3>Bürger</h3>
 	<table border=\"0\">
 		<tr>
 			<td>Beruf</td>

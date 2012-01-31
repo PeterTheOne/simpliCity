@@ -256,7 +256,7 @@ html, body{
 	color: #EEEEEE;
 }
 
-#statistics{
+#statistics, #impressum{
 	text-align: left;
 	overflow: auto;
 	height: 100%;
@@ -264,6 +264,6 @@ html, body{
 	padding-left: 10px;
 }
 
-#statistics h3:first-child{
+#statistics h3:first-child, #impressum h3:first-child{
 	margin-top: 55px;
 }

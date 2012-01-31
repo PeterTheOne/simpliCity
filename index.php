@@ -31,7 +31,7 @@
 		require_once("template/view_list.tpl.php");
 	} else if($_GET["view"] == "stats"){							//nutzer wählt statistiken
 		require_once("template/view_stats.tpl.php");			//TODO: Stats Seite
-	} else if($_GET["view"] == "setup"){							//nutzer wählt einstellungen
+	} else if($_GET["view"] == "help"){							//nutzer wählt einstellungen
 		require_once("template/view_setup.tpl.php");			//TODO: Setup Seite oder entfernen
 	} else if($_GET["view"] == "checkin"){							//neuer checkin
 		require_once("template/view_checkin.tpl.php");

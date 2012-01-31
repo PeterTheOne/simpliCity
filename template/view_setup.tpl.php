@@ -1,4 +1,4 @@
-<div id="impressum" class="scrolling">
+<div id="imp" class="scrolling">
 	<h3>allgemeine Informationspflichten gem &sect; 5 E-Commerce-Gesetz (ECG)</h3>
 	<p>Inhaber und Verantwortlicher dieser Webseite:<p>
 	<p>

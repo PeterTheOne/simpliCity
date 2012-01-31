@@ -39,29 +39,43 @@
 	<p>
 		Deine 10 erfolgreichsten Städte sind: 
 	</p>
-	<ul>
+	<table border=\"0\">
+		<tr>
+			<td>Venue</td>
+			<td>Bürger</td>
+		</tr>
 	<?php
 		$citiesByUser = db_citiesByUser($user->id);
 		foreach ($citiesByUser as $city) {
 	?>
-		<li><?php echo fs_getVenue($city['VenueID'])->name . " - Bürger: " . $city['countJob']  ?></li>
+		<tr>
+			<td><?php echo fs_getVenue($city['VenueID'])->name; ?></td>
+			<td><?php echo $city['countJob'] ?></td>
+		</tr>
 	<?php
 		}
 	?>
-	</ul>
+	</table>
 	<p>
 		Die Städte in denen du mehr Bürger als alle anderen Spieler hast:
 	</p>
-	<ul>
+	<table border=\"0\">
+		<tr>
+			<td>Venue</td>
+			<td>Bürger</td>
+		</tr>
 	<?php
 		$mostCitizenCities = db_mostCitizenCities($user->id);
 		foreach ($mostCitizenCities as $city) {
 	?>
-		<li><?php echo fs_getVenue($city['VenueID'])->name . " - Bürger: " . $city['countJob'] ?></li>
+		<tr>
+			<td><?php echo fs_getVenue($city['VenueID'])->name; ?></td>
+			<td><?php echo $city['countJob'] ?></td>
+		</tr>
 	<?php
 		}
 	?>
-	</ul>
+	</table>
 	<!--
 	<h2>Regionale Aktivität</h2>
 	<p>

@@ -84,6 +84,7 @@
 		(wie werden die punkte berechnet?)
 	</p>
 	-->
+	<p/>
 </div>
 <div id="menu">
 	<?php

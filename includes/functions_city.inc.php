@@ -13,10 +13,12 @@ function getCityValues(){
 	$self = fs_getSelfCheckinOne();
 	$venueID = $self->venue->id;
 	$venueName = $self->venue->name;
-	printCityValues(db_citizenInVenue($venueID),db_playersInVenue($venueID),$venueID, $venueName,db_remainingCitizen($_SESSION['userid']));
+	global $user;
+	db_selectUser($_SESSION['userid']);
+	printCityValues(db_citizenInVenue($venueID),db_playersInVenue($venueID),$venueID, $venueName,db_remainingCitizen($_SESSION['userid']),$user->points);
 }
 
-function printCityValues($citizencounts, $playercount, $venueID, $venueName, $remaining){
+function printCityValues($citizencounts, $playercount, $venueID, $venueName, $remaining, $points){
 	
 	$citizens = 0;
 	$multiplicator = sqrt($playercount);
@@ -68,6 +70,7 @@ function printCityValues($citizencounts, $playercount, $venueID, $venueName, $re
 		<p id="rural"><?php echo round($rural); ?></p>
 		<p id="citizens"><?php echo round($citizens); ?></p>
 		<p id="remaining"><?php echo round($remaining); ?></p>
+		<p id="userpoints"><?php echo round($points); ?></p>
 	</div>
 	
 	<?php

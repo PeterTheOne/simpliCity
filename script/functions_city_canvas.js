@@ -98,7 +98,7 @@ window.onload = function(){
 function updateCity(){
 	seed = document.getElementById("venueID").innerHTML;
 	document.getElementById("cityname").innerHTML = document.getElementById("venueName").innerHTML + "<br/>" + document.getElementById("citizens").innerHTML + " Einwohner";
-	document.getElementById("citizenCount").innerHTML = document.getElementById("remaining").innerHTML;
+	document.getElementById("citizenCount").innerHTML = document.getElementById("remaining").innerHTML + " Freie B&uuml;rger<br/>" + document.getElementById("userpoints").innerHTML + " Punkte";
 	var cityname = $("#cityname");
 	$("#cityname").remove();
 	$("#upperLeft").append(cityname);

@@ -17,11 +17,11 @@ $venue = $latestCheckin->venue;
 db_selectUser($_SESSION['userid']);
 
 if(isset($_POST["lat"]) && isset($_POST["lon"])){
-	$items = fs_getVenuesExplore($_POST["lat"].", ".$_POST["lon"], 10);
+	$venues = fs_getVenuesSearch($_POST["lat"].", ".$_POST["lon"], 10);
 	echo "<h3>Checkin:</h3>";
-	
-	foreach ($items as $item) {?>
-			<p class="widebutton"><a class="venue" href="index.php?view=checkin&checkinid=<?php echo $item->id ?>"><?php echo $item->name; ?></a></p>
+
+	foreach ($venues as $venue) {?>
+			<p class="widebutton"><a class="venue" href="index.php?view=checkin&checkinid=<?php echo $venue->id ?>"><?php echo $venue->name; ?></a></p>
 	<?php }
 	
 	/*foreach ($items as $item) {?>

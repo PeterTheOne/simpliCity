@@ -7,6 +7,8 @@ db_connect();
 $r = mysql_query(
 	"CREATE TABLE IF NOT EXISTS users (
 		ID BIGINT NOT NULL PRIMARY KEY,
+		FirstName VARCHAR(128) NOT NULL,
+		LastName VARCHAR(128) NOT NULL,
 		Token VARCHAR(128) NOT NULL,
 		LoginDate DATE NOT NULL,
 		UnusedCitizen INT NOT NULL,

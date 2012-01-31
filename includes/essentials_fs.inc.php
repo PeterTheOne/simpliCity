@@ -1,6 +1,7 @@
 <?php
 
 require_once("includes/config.inc.php");
+require_once("includes/lib/FoursquareAPI.class.php");
 
 /*
  *
@@ -96,7 +97,7 @@ function fs_getSelfCheckins($limit = 1) {
 function fs_getVenuesExplore($ll, $limit = 5) {
 	global $foursquare;
 	$request = $foursquare->GetPrivate(
-					"venues/search", 			//besser mit /search ?
+					"venues/explore", 
 					array(
 						'limit' => $limit, 
 						'll' => $ll, 
@@ -107,15 +108,35 @@ function fs_getVenuesExplore($ll, $limit = 5) {
 	if (fs_hasErrors($details->meta)) return false;
 	
 	//code für venues/search
-	return $details->response->venues;
+	//return $details->response->venues;
 	
 	//alter code für venues/explore
-	/*foreach ($details->response->groups as $group) {
+	foreach ($details->response->groups as $group) {
 		if ($group->type == "recommended") {
 			return $group->items;
 		}
-	}*/
+	}
 	return false;
+}
+
+/*
+ *
+ *	returns venues list by location
+ *
+*/
+function fs_getVenuesSearch($ll, $limit = 5) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"venues/search", 
+					array(
+						'limit' => $limit, 
+						'll' => $ll, 
+						'v' => FOURSQUARE_API_VERSION
+					)
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return $details->response->venues;
 }
 
 /*
@@ -165,5 +186,17 @@ function fs_getVenueLocation($venueid) {
 	return $details->response->venue->location;	
 }
 
+function fs_getUser($userId) {
+	global $foursquare;
+	$request = $foursquare->GetPrivate(
+					"users/$userId",
+					array(
+						'v' => FOURSQUARE_API_VERSION
+					)
+	);
+	$details = json_decode($request, false);
+	if (fs_hasErrors($details->meta)) return false;
+	return $details->response->user;
+}
 
 ?>

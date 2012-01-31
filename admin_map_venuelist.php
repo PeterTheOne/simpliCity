@@ -32,7 +32,10 @@ echo "lat\tlon\ttitle\tdescription\ticon\ticonSize\ticonOffset\n";
 		echo "userlist: <ul>";
 		
 		foreach ($venueUsers as $venueUser) {
-			echo "<li>" . $venueUser['UserID'] . ": " . $venueUser['citizenCount'] . "</li>";
+			echo "<li>" ;
+			echo "<a href=\"https://foursquare.com/user/" . $venueUser['UserID'] . "\">";
+			echo $venueUser['FirstName'] . " " . $venueUser['LastName'] . "</a>: " . $venueUser['citizenCount'];
+			echo "</li>";
 		}
 		
 		echo "</ul>\t";

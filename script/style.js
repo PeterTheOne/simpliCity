@@ -56,7 +56,7 @@ $(function(){
 		});
 	});
 	
-	$(".scrolling, .scrolling *").bind("touchstart",function(event){
+	/*$(".scrolling, .scrolling *").bind("touchstart",function(event){
 		sy = event.touches[0].pageY;
 		cy = $(".scrolling").scrollTop();
 		scroll = true;
@@ -71,22 +71,22 @@ $(function(){
 
 	$("*").bind("touchend",function(event){
 		scroll = false;
-	});
+	});*/
 	
-	$(".scrolling, .scrolling *").bind("mousedown",function(event){
+	$(".scrolling, .scrolling *").bind("vmousedown",function(event){
 		sy = event.pageY;
 		cy = $(".scrolling").scrollTop();
 		scroll = true;
 	});
 	
-	$(".scrolling, .scrolling *").bind("mousemove",function(event){
+	$(".scrolling, .scrolling *").bind("vmousemove",function(event){
 		if(scroll){
 			var dy = sy-event.pageY;
 			$(".scrolling").scrollTop(cy + dy);
 		}
 	});
 	
-	$("*").bind("mouseup",function(event){
+	$("*").bind("vmouseup",function(event){
 		scroll = false;
 	});
 	

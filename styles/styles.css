@@ -272,3 +272,7 @@ html, body{
 #statistics p:last-child, #imp p:last-child{
 	padding-bottom: 55px;
 }
+
+.upspace{
+	margin-top: 55px;
+}

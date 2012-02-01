@@ -4,7 +4,7 @@ $(function(){
 		navigator.geolocation.getCurrentPosition(saveCoords, error);
 	} else {
 		// GeoLocation nicht verfügbar
-		$("#venuelist").html("<p>Sorry, your browser doesn't support GeoLocation, please check-in manually at Foursquare!</p>");
+		$("#venuelist").html("<p class=\"upspace\">Sorry, your browser doesn't support GeoLocation, please check-in manually at Foursquare!</p>");
 	}
 	
 	$(".widebutton").live("click",function(){

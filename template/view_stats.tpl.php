@@ -4,6 +4,25 @@
 		db_selectUser($_SESSION['userid']);
 	?>
 	<h3>Punkte: <?php echo $user->points; ?></h3>
+	<h3>Highscores</h3>
+	<table border=\"0\">
+		<tr>
+			<td>Name</td>
+			<td>Punkte</td>
+		</tr>
+		<?php
+		$scores = db_getHighscores();
+		foreach ($scores as $score) {
+	?>
+		<tr>
+			<td><?php echo $score["FirstName"]." ".$score["LastName"]; ?></td>
+			<td><?php echo $score["Points"] ?></td>
+		</tr>
+	<?php
+		}
+	?>
+	</table>
+	<p>Du befindest dich auf Platz <?php echo db_getUserScorePosition($user->id); ?> in der Highscoreliste!</p>
 	<h3>Bürger</h3>
 	<table border=\"0\">
 		<tr>

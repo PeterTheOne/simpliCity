@@ -434,5 +434,51 @@ function db_selectUsers() {
 	return $array;
 }
 
+function db_getHighscores() {
+	db_connect();
+	$r = mysql_query("
+		SELECT FirstName, LastName, Points FROM users ORDER BY Points DESC LIMIT 10
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$scores = array();
+	while ($line = mysql_fetch_array($r)) {
+		$scores[] = $line;
+	}
+	db_disconnect();
+	return $scores;
+}
+
+function db_getUserScorePosition($userId) {
+	db_connect();
+	$userId = mysql_real_escape_string($userId);
+	$r = mysql_query("
+		SELECT Points FROM users WHERE ID='$userId'
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$points = 0;
+	while ($line = mysql_fetch_array($r)) {
+		$points = $line["Points"];
+	}
+	$r = mysql_query("
+		SELECT COUNT(*) AS position FROM users WHERE Points > '$points'
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$position = 0;
+	while ($line = mysql_fetch_array($r)) {
+		$position = $line["position"];
+	}
+	db_disconnect();
+	return $position+1;
+}
+
 
 ?>

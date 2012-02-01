@@ -1,4 +1,8 @@
 <div id="imp" class="scrolling">
+	<h3>Credits</h3>
+	<p>Nora Auer<br/><em> - Design</em></p>
+	<p>Peter Grassberger<br/><em> - Programmierung</em></p>
+	<p>Andreas Kasch<br/><em> - Programmierung</em></p>
 	<h3>allgemeine Informationspflichten gem &sect; 5 E-Commerce-Gesetz (ECG)</h3>
 	<p>Inhaber und Verantwortlicher dieser Webseite:<p>
 	<p>

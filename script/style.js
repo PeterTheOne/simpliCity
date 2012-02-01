@@ -15,11 +15,11 @@ $(function(){
 		update();
 	});
 	
-	$("#canvas").bind("touchend",function(){
+	$("#canvas, #cityname, #citizenCount").bind("touchend",function(){
 		$("#canvas").click();
 	});
 	
-	$("#canvas").click(function(){
+	$("#canvas, #cityname, #citizenCount").click(function(){
 		$("#overlay").hide();
 	});
 	

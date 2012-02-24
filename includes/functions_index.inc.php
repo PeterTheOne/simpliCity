@@ -8,6 +8,12 @@
 	*/
 	function checkAuthentication() {
 		global $foursquare;
+		
+		if (isset($_GET['code'])) {
+			fs_setup();
+			$_SESSION['authtoken'] = $foursquare->GetToken(sanitize($_GET['code']), REDIRECT_URI);
+			header("Location: redir_login.php");
+		}
 	
 		if (!isset($_SESSION['authtoken']) || 
 				$_SESSION['authtoken'] === "") {
@@ -80,7 +86,7 @@
 			}
 			
 		} else {
-			
+		
 			db_disconnect();
 			return false;
 		

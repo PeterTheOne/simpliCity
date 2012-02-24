@@ -10,7 +10,7 @@
 	require_once("includes/User.class.inc.php");
 	
 	require_once("includes/functions_index.inc.php");
-
+	
 	checkAuthentication();
 	
 	/*

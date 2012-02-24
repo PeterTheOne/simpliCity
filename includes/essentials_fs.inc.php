@@ -9,7 +9,7 @@ require_once("includes/lib/FoursquareAPI.class.php");
  *	you may still need to SetAccessToken!!!
  *
 */
-function fs_setup($authtoken = null){
+function fs_setup($authtoken = null) {
 	global $foursquare;
 	$foursquare = new FoursquareAPI(CLIENT_ID, CLIENT_SECRET);
 	if ($authtoken != null) {

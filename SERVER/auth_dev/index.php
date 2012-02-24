@@ -6,6 +6,7 @@
 define("CLIENT_ID", "GPP0FG0DZI3ES5JKLNBJWZDMEITYI2XECBVTSW2GL3ZJCHGT");
 define("CLIENT_SECRET", "5P3ABYS1CSVHXVEEAHWZP1A42DWZ4DTXROA5SAFCTXZCJNMX");
 define("REDIRECT_URI", "http://petergrassberger.at/pro5/prototypes/foursquare-api_php-foursquare/");
+define("LIVE_SERVER_URL", "http://simplicity-game.com");
 
 // includes and functions
 
@@ -21,6 +22,11 @@ function sanitize($str) {
 session_start();
 
 if (isset($_GET['host'])) {
+	$host = sanitize($_GET['host']);
+	if (substr($host, 0, 9) !== "localhost") {
+		header('Location: ' . LIVE_SERVER_URL);
+		exit();
+	}
 	$_SESSION['host'] = sanitize($_GET['host']);
 }
 

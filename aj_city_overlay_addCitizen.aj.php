@@ -42,7 +42,7 @@ function addCitizen($user, $venueId, $checkinTime, $job) {
 	mysql_query("SET AUTOCOMMIT=0");
 	mysql_query("START TRANSACTION");
 	$r1 = mysql_query("UPDATE users SET UnusedCitizen=UnusedCitizen-1 WHERE ID='$user->id'");
-	$r2 = mysql_query("INSERT INTO citizen (UserID,VenueID,Job) VALUES ('$user->id','$venueId','$job')");
+	$r2 = mysql_query("INSERT INTO citizen (UserID,VenueID,Job,DateAdded) VALUES ('$user->id','$venueId','$job',NOW())");
 	$r3 = mysql_query("
 		UPDATE 
 			users 

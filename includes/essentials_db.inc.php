@@ -480,5 +480,40 @@ function db_getUserScorePosition($userId) {
 	return $position+1;
 }
 
+function db_citizenActivity($limit = 10) {
+	db_connect();
+	$r = mysql_query("
+		SELECT 
+			*, 
+			DATE(DateAdded) as dateAddedDay, 
+			UNIX_TIMESTAMP(DateAdded) as dateAddedUnix, 
+			COUNT(*) as citizenCount 
+		FROM 
+			citizen 
+		INNER JOIN 
+			users 
+		ON 
+			citizen.UserID = users.ID 
+		GROUP BY 
+			UserID, 
+			VenueID, 
+			dateAddedDay 
+		ORDER BY 
+			DateAdded DESC 
+		LIMIT 
+			$limit
+	");
+	if (db_hasErrors($r)) {
+		db_disconnect();
+		return false;
+	}
+	$activity = array();
+	while ($line = mysql_fetch_array($r)) {
+		$activity[] = $line;
+	}
+	db_disconnect();
+	return $activity;
+}
+
 
 ?>
